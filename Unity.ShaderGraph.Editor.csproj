@@ -131,8 +131,8 @@
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.9\Editor\Data\Nodes\Input\Geometry\ScreenPositionNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.9\Editor\Drawing\Views\StickyNote.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.9\Editor\Drawing\Inspector\TabbedView\TabbedView.cs" />
-    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.9\Editor\Data\Graphs\PreviewProperty.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.9\Editor\Data\Nodes\Math\Round\SignNode.cs" />
+    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.9\Editor\Data\Graphs\PreviewProperty.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.9\Editor\Drawing\Interfaces\IResizable.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.9\Editor\Generation\Targets\Fullscreen\FullscreenShaderGUI.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.9\Editor\Data\Graphs\SerializableVirtualTexture.cs" />

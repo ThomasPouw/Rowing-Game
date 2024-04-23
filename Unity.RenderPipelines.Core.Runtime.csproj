@@ -159,8 +159,8 @@
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerObject.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Runtime\Debugging\IDebugDisplaySettings.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Runtime\PostProcessing\LensFlareDataSRP.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Runtime\Lighting\ProbeVolume\ProbeReferenceVolume.Debug.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Runtime\XR\XRLayout.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Runtime\Lighting\ProbeVolume\ProbeReferenceVolume.Debug.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Runtime\Common\CommonStructs.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Runtime\Utilities\DelegateUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Runtime\XR\XRSystem.cs" />
