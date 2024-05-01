@@ -8,7 +8,7 @@ float _ImpactAmount;
 float _ImpactTimes[10];
 float _YOffset;
 
-
+#define PI 3.14159265358979323846
 float3 SineWave (float4 wave, float3 p, float time, inout float3 tangent, inout float3 binormal) {
 	// Calculates and returns displacement vector at position "p" and for sinewave "wave" 
 	// Updates "tangent" vector and "binormal" vector
