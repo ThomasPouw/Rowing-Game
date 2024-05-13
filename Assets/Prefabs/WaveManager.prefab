@@ -48,8 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   YOffset: 0
   steepnessMod: 0
+  safe: {fileID: 0}
   waveObject: {fileID: 11400000, guid: 5c945e7d556a2c544bc8ab8197e6bc23, type: 2}
-  waveMaterial: {fileID: 2100000, guid: ac4b2b7d0a0535b448fa75ae26858786, type: 2}
+  waveMaterial: {fileID: 2100000, guid: 53fabb4a12cdb454cbd53bf52e49d49a, type: 2}
   computeShader: {fileID: 7200000, guid: 2f712c5a5c4870f47a7191c7a3594aa2, type: 3}
 --- !u!82 &2796226539037842349
 AudioSource:
@@ -230,7 +231,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ac4b2b7d0a0535b448fa75ae26858786, type: 2}
+  - {fileID: 2100000, guid: 53fabb4a12cdb454cbd53bf52e49d49a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

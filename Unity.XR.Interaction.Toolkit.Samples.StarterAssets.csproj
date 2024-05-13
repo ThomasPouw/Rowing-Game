@@ -64,14 +64,17 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.13f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.4.3\Starter Assets\Scripts\DynamicMoveProvider.cs" />
-    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.4.3\Starter Assets\Scripts\XRPokeFollowAffordance.cs" />
-    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.4.3\Starter Assets\Scripts\ActionBasedControllerManager.cs" />
-    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.4.3\Starter Assets\Scripts\GazeInputManager.cs" />
-    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.4.3\Starter Assets\Scripts\PokeStation\IncrementUIText.cs" />
+    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.5.4\Starter Assets\Scripts\XRPokeFollowAffordance.cs" />
+    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.5.4\Starter Assets\Scripts\ActionBasedControllerManager.cs" />
+    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.5.4\Starter Assets\Scripts\GazeInputManager.cs" />
+    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.5.4\Starter Assets\Scripts\DynamicMoveProvider.cs" />
+    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.5.4\Starter Assets\DemoSceneAssets\Scripts\IncrementUIText.cs" />
+    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.5.4\Starter Assets\Scripts\DestroySelf.cs" />
+    <Compile Include="Assets\Samples\XR Interaction Toolkit\2.5.4\Starter Assets\Scripts\ObjectSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Samples\XR Interaction Toolkit\2.4.3\Starter Assets\Unity.XR.Interaction.Toolkit.Samples.StarterAssets.asmdef" />
+    <None Include="Assets\Samples\XR Interaction Toolkit\2.5.4\Starter Assets\Tunneling Vignette\TunnelingVignette.shader" />
+    <None Include="Assets\Samples\XR Interaction Toolkit\2.5.4\Starter Assets\Unity.XR.Interaction.Toolkit.Samples.StarterAssets.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -957,9 +960,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.InputSystem.csproj" />
+    <ProjectReference Include="Unity.Mathematics.csproj" />
     <ProjectReference Include="Unity.XR.CoreUtils.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.csproj" />
-    <ProjectReference Include="Unity.Mathematics.csproj" />
     <ProjectReference Include="UnityEditor.UI.csproj" />
     <ProjectReference Include="UnityEngine.UI.csproj" />
   </ItemGroup>
