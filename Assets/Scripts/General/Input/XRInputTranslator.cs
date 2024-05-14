@@ -22,5 +22,10 @@ public class XRInputTranslator : MonoBehaviour
     void Update()
     {
         //verticalMovementNormal = LeftVRController
+        Debug.Log("LeftVRController POS"+ LeftVRController.positionAction.reference);
+        Debug.Log("RightVRController POS"+ RightVRController.positionAction.reference);
+
+        Debug.Log("LeftVRController ROT"+ LeftVRController.rotationAction.reference);
+        Debug.Log("RightVRController ROT"+ RightVRController.rotationAction.reference);
     }
 }
