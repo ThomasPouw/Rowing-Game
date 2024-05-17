@@ -154,7 +154,6 @@ public class PeddalBoat : MonoBehaviour
         Vector3 normal = new Vector3();
         Vector3 point = WaveManager.instance.GetDisplacementFromGPU(pos, ref normal);
         Debug.DrawLine(pos, point);
-        Debug.Log(pos.y < point.y);
         return pos.y < point.y;
     }
 }

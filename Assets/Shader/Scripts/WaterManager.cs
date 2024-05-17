@@ -27,7 +27,10 @@ public class WaterManager : MonoBehaviour
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     private MeshCollider meshCollider;
-    
+    public Mesh GetMesh(){
+        while(mesh == null){}
+        return mesh;
+    }
     private void Awake() {
         meshFilter = gameObject.GetComponent<MeshFilter>() ? gameObject.GetComponent<MeshFilter>() : gameObject.AddComponent<MeshFilter>();
         meshRenderer = gameObject.GetComponent<MeshRenderer>() ? gameObject.GetComponent<MeshRenderer>() : gameObject.AddComponent<MeshRenderer>();

@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Shader\Scripts\FishAI.cs" />
+    <Compile Include="Assets\Scripts\General\Input\YAW\RotationLimitsPanel.cs" />
     <Compile Include="Assets\Shader\Scripts\WaterManager.cs" />
     <Compile Include="Assets\Shader\Scripts\Boat\PeddalDetectors.cs" />
     <Compile Include="Assets\Scripts\General\MoveWithOrigin.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\YawVR\Sample\ControlSamples\VelocityController.cs" />
     <Compile Include="Assets\YawVR\Scripts\Pitch.cs" />
     <Compile Include="Assets\YawVR\Sample\LED\ColorTransition.cs" />
+    <Compile Include="Assets\Scripts\General\Input\RevSimUI_Operator.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\DestroyObject.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\CellularAutomaton\Ruleset.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\VideoTimeScrubControl.cs" />
@@ -88,7 +90,6 @@
     <Compile Include="Assets\VRTemplateAssets\Scripts\BooleanToggleVisualsController.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\BuildingGenerator\ProceduralFacadePanels.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Tetrahedron.cs" />
-    <Compile Include="Assets\YawVR\Scripts\UI\RotationPanel.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Spheroid.cs" />
     <Compile Include="Assets\YawVR\Scripts\ActionBus.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\RayAttachModifier.cs" />
@@ -97,8 +98,6 @@
     <Compile Include="Assets\YawVR\Scripts\DynamicDisable.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\ChairGenerator\Stretchers.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Mazes\Edge.cs" />
-    <Compile Include="Assets\YawVR\Scripts\UI\RotationLimitsPanel.cs" />
-    <Compile Include="Assets\Scripts\RaftSimUI.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\LowPolyTerrainGenerator\LowPolyTerrainGeneratorConfigurator.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\BuildingGenerator\BuildingGeneratorConfigurator.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Common\TextControl.cs" />
@@ -122,17 +121,17 @@
     <Compile Include="Assets\VRTemplateAssets\Scripts\CalloutGazeController.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\ColorHSV.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Pyramid.cs" />
-    <Compile Include="Assets\Scripts\General\RevSimUI_Yaw.cs" />
     <Compile Include="Assets\YawVR\Sample\ControlSamples\SimpleOrientation.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Boids\BoidControllerConfigurator.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Common\SliderControl.cs" />
     <Compile Include="Assets\YawVR\Scripts\Helpers.cs" />
     <Compile Include="Assets\YawVR\Scripts\Orientation.cs" />
+    <Compile Include="Assets\Scripts\General\Input\RevSimUI_Yaw.cs" />
     <Compile Include="Assets\YawVR\Scripts\MotionCompensation.cs" />
+    <Compile Include="Assets\Scripts\General\Input\YAW\RotationPanel.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Common\CameraRotator.cs" />
     <Compile Include="Assets\YawVR\Sample\ChangeColor.cs" />
     <Compile Include="Assets\Scripts\General\Input\XRInputTranslator.cs" />
-    <Compile Include="Assets\YawVR\Scripts\UI\SampleYawControllerDelegateImplementation.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\BuildingGenerator\BuildingGenerator.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\FlatTeardrop.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Common\ButtonControl.cs" />
@@ -151,6 +150,7 @@
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Sphere.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Common\SkyBoxGenerator.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\FlatSphere.cs" />
+    <Compile Include="Assets\Scripts\Buoy\ObjectSpawner.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Mazes\MazeGenerator.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\BuildingGenerator\IFacadeLayout.cs" />
     <Compile Include="Assets\YawVR\Scripts\Roll.cs" />
@@ -160,6 +160,7 @@
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\BuildingGenerator\HorizontalLayout.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\BuildingGenerator\BuildingGeneratorBase.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\DebugE.cs" />
+    <Compile Include="Assets\Scripts\General\Input\RaftSimUI.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\MeshDraftPrimitives.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\ChairGenerator\ChairGeneratorConfigurator.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
@@ -169,10 +170,10 @@
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\ChairGenerator\Armrests.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\CellularAutomaton\CellState.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Common\ConfiguratorBase.cs" />
-    <Compile Include="Assets\Scripts\General\RevSimUI_Operator.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Octahedron.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\ChairGenerator\Backs.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\LaunchProjectile.cs" />
+    <Compile Include="Assets\Scripts\Buoy\BuoyTriggerCentered.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Mazes\Cell.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Plane.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Boids\BoidController.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Assets\YawVR\Sample\LED\SimpleColor.cs" />
     <Compile Include="Assets\YawVR\Scripts\YawDevice.cs" />
     <Compile Include="Assets\Shader\Scripts\Waves\WaveManager.cs" />
+    <Compile Include="Assets\Scripts\General\Input\YAW\SampleYawControllerDelegateImplementation.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\CellularAutomaton\CellularAutomaton.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Cylinder.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\MeshDraft.cs" />

@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,7 +61,7 @@ namespace JustPtrck.Shaders.Water{
 
                 case FloaterType.Ideal:
                 rb.useGravity = false;
-                CalculatePosition();
+                StartCoroutine(CalcPosition());
                 break;
             }
         }
@@ -71,7 +72,8 @@ namespace JustPtrck.Shaders.Water{
         /// BUG The results are off when using Impact waves,
         /// Also teleporting happens
         /// </summary>
-        private void CalculatePosition(){
+        public IEnumerator CalcPosition()
+        {
             Vector3 sumVector = Vector3.zero;
             Vector3 sumNormals = Vector3.zero;
             points = new List<Vector3>(); 
@@ -80,7 +82,7 @@ namespace JustPtrck.Shaders.Water{
             {
                 Vector3 normal = new Vector3();
                 Vector3 floaterPos = anchor.position + Vector3.Scale(transform.localScale, floater.localPosition);
-                Vector3 point = WaveManager.instance.GetDisplacementFromGPU(floaterPos, ref normal) ;
+                Vector3 point = WaveManager.instance.GetDisplacementFromGPU(floaterPos, ref normal);
                 points.Add(point);
                 sumVector += point;
                 sumNormals += normal;
@@ -90,7 +92,31 @@ namespace JustPtrck.Shaders.Water{
             meanNormal = sumNormals / floaters.Count;
             transform.position = meanVector;
             transform.up = meanNormal;
-            Vector3 temp = transform.position + new Vector3(Mathf.Sin(anchor.rotationAngle), 0f, Mathf.Cos(anchor.rotationAngle)).normalized;
+            //Vector3 temp = transform.position + new Vector3(Mathf.Sin(anchor.rotationAngle), 0f, Mathf.Cos(anchor.rotationAngle)).normalized;
+            transform.Rotate(transform.up, anchor.rotationAngle, Space.World);
+            if (showNormals) Debug.DrawRay(transform.position, meanNormal, Color.red);
+            yield return 0;
+        }
+        private void CalculatePosition(){
+            Vector3 sumVector = Vector3.zero;
+            Vector3 sumNormals = Vector3.zero;
+            points = new List<Vector3>(); 
+
+            foreach (Transform floater in floaters)
+            {
+                Vector3 normal = new Vector3();
+                Vector3 floaterPos = anchor.position + Vector3.Scale(transform.localScale, floater.localPosition);
+                Vector3 point = WaveManager.instance.GetDisplacementFromGPU(floaterPos, ref normal);
+                points.Add(point);
+                sumVector += point;
+                sumNormals += normal;
+                if (showNormals) Debug.DrawRay(point, normal, Color.yellow);
+            }
+            meanVector = sumVector / floaters.Count;
+            meanNormal = sumNormals / floaters.Count;
+            transform.position = meanVector;
+            transform.up = meanNormal;
+            //Vector3 temp = transform.position + new Vector3(Mathf.Sin(anchor.rotationAngle), 0f, Mathf.Cos(anchor.rotationAngle)).normalized;
             transform.Rotate(transform.up, anchor.rotationAngle, Space.World);
             if (showNormals) Debug.DrawRay(transform.position, meanNormal, Color.red);
         }
