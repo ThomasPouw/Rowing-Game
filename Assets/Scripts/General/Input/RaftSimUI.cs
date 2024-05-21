@@ -9,6 +9,7 @@ using YawVR;
 using System.Net;
 using UnityEngine.XR;
 using UnityEditor.XR.LegacyInputHelpers;
+using System.ComponentModel;
 public class RaftSimUI : MonoBehaviour 
 {
     [Header("Level Selection")]
@@ -16,7 +17,15 @@ public class RaftSimUI : MonoBehaviour
     [SerializeField] private Slider timeSlider, levelSlider, modSlider;
     [SerializeField] private InputField timeField, levelField, modField;
 
-    [Header("Spawn Settings")]
+    [Header("Buoy Row Setting")]
+    [SerializeField] private bool UseBuoyGame;
+    [SerializeField] [Description("Its a script called 'ObjectSpawner' as the writer of the script wanted the script to be used in other situations aswell.")]
+    private ObjectSpawner BuoySpawner;
+    [SerializeField] private Slider buoyAmountSlider, buoyPointSlider;
+    [SerializeField] private InputField buoyAmountField, buoyPointField;
+
+    [Header("BirdGame Settings")]
+    [SerializeField] private bool UseBirdGame;
     [SerializeField] private ReachingExerciseSpawner reachingSpawner;
     [SerializeField] private Slider radiusSlider, horizontalSlider, verticalSlider, offsetSlider;
     [SerializeField] private InputField radiusField, horizontalField, verticalField, offsetField;
@@ -24,10 +33,17 @@ public class RaftSimUI : MonoBehaviour
     private void Start()
     {
         UpdateLevelManagerValues();
-        UpdateRadius();
-        UpdateHorizontal();
-        UpdateVertical();
-        UpdateOffset();
+        if(UseBirdGame)
+        {
+            UpdateRadius();
+            UpdateHorizontal();
+            UpdateVertical();
+            UpdateOffset();
+        }
+        if(UseBuoyGame){
+            UpdateBuoyAmount();
+            UpdateBuoyPoints();
+        }
     }
 
     // Update is called once per frame
@@ -68,7 +84,7 @@ public class RaftSimUI : MonoBehaviour
 
 #endregion
 
-#region Collectible
+#region BirdGame
     public void UpdateRadius()
     {
         radiusField.text =  reachingSpawner.radius.ToString("0.00");
@@ -116,6 +132,32 @@ public class RaftSimUI : MonoBehaviour
         UpdateOffset();
     }
     public void SetOffset(string value) => SetOffset(float.Parse(value));
+#endregion
+    
+#region BuoyGame
+    public void SetBuoyAmount(string value) => SetBuoyAmount(short.Parse(buoyAmountSlider.value.ToString()));
+    public void SetBuoyAmount(short value)
+    {
+        BuoySpawner.ObjectAmount = value;
+        UpdateBuoyAmount();
+    }
+    public void UpdateBuoyAmount()
+    {
+        buoyAmountField.text = BuoySpawner.ObjectAmount.ToString("0"); 
+        buoyAmountSlider.value = BuoySpawner.ObjectAmount;
+    }
+    public void SetBuoyPoints(string value) => SetBuoyPoints(float.Parse(buoyPointSlider.value.ToString()));
+    public void SetBuoyPoints(float value)
+    {
+        BuoySpawner.ObjectPoints = value;
+        UpdateBuoyPoints();
+    }
+    public void UpdateBuoyPoints()
+    {
+        //Not done yet.
+        buoyPointField.text = BuoySpawner.ObjectPoints.ToString("0.00"); 
+        buoyPointSlider.value = BuoySpawner.ObjectPoints;
+    }
 #endregion
 
     public void ExitApp()

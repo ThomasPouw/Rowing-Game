@@ -39,6 +39,7 @@ public class BuoyTriggerCentered : MonoBehaviour
         Debug.Log(other.name);
         if(other.name == "Boat")
         {
+            //Just move the Buoy. 
             Buoys[0].GetChild(1).gameObject.GetComponent<Renderer>().material = CollectedLight;
             Buoys[1].GetChild(1).gameObject.GetComponent<Renderer>().material = CollectedLight;
             gameObject.SetActive(false);

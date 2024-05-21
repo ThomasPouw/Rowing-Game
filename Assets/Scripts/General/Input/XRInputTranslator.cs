@@ -21,6 +21,11 @@ public class XRInputTranslator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //verticalMovementNormal = LeftVRController
+        Debug.Log(LeftVRController.positionAction.reference);
+        Debug.Log(RightVRController.positionAction.reference);
+        Debug.Log(LeftVRController.rotationAction.reference);
+        Debug.Log(RightVRController.rotationAction.reference);
+        Debug.Log(LeftVRController.trackingStateAction.reference);
+        Debug.Log(RightVRController.trackingStateAction.reference);
     }
 }

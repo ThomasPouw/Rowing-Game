@@ -10,8 +10,33 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] private WaterManager WaterMesh;
     [SerializeField] private float[] bounds;
     [Header("Variables")]
+    [SerializeField] private GameObject StoreLocation;
     [SerializeField] private List<Transform> SpawnedObjects;
-    [SerializeField]private short ObjectAmount;
+    [SerializeField]public short ObjectAmount 
+    {
+        get {return objectAmount;}
+        set 
+        {
+            if(value <= objectAmount)
+            {
+                List<Transform> objects = SpawnedObjects.GetRange(objectAmount, value - objectAmount);
+                for (int i = 0; i < objects.Count; i++)
+                {
+                    Destroy(objects[i]);
+                }
+                SpawnedObjects.RemoveRange(objectAmount, value - objectAmount);
+                objectAmount = value;
+            } 
+            else
+            {
+                short old = objectAmount;
+                objectAmount = value;
+                Spawn(old);
+            }
+        }
+    }
+    [SerializeField] public float ObjectPoints; //Needs a Getter setter added.
+    [SerializeField] private short objectAmount;
     [SerializeField] private GameObject prefabOBJ;
     // Start is called before the first frame update
     private void OnEnable() {
@@ -23,28 +48,30 @@ public class ObjectSpawner : MonoBehaviour
         
     }
     /// <summary>
-    /// Recursion! Think it as a kind of solved grandfathers paradox
+    /// Recursion! Spawns as many version of the object as you ask. The counter is how many items it already has spawned.
+    /// 
     /// </summary>
-    private bool Spawn(short BuoyCounter)
+    public bool Spawn(short BuoyCounter, GameObject spawnedObject = null)
     {
     
         float X = Random.Range(bounds[0], bounds[1]);
         float Z = Random.Range(bounds[2], bounds[3]);
 
         if(SpawnedObjects.Find(T => (int)T.position.x == (int)X && (int)T.position.z == (int)Z) != null)
+            return Spawn(BuoyCounter, spawnedObject);
+        if(spawnedObject == null)
         {
-            return Spawn(BuoyCounter);
+            spawnedObject =Instantiate(prefabOBJ, new Vector3(X, 0, Z), transform.rotation);
+            SpawnedObjects.Add(spawnedObject.transform);
+            spawnedObject.transform.parent = StoreLocation.transform;
         }
-        GameObject NB =Instantiate(prefabOBJ, new Vector3(X, 0, Z), transform.rotation);
-        SpawnedObjects.Add(NB.transform);
         BuoyCounter++;
-
-        Floater F1 =NB.transform.GetChild(0).GetComponent<Floater>();
-        SetFloaterCoords(F1, NB.transform);
-        F1 =NB.transform.GetChild(1).GetComponent<Floater>();
-        SetFloaterCoords(F1, NB.transform);
+        Floater F1 =spawnedObject.transform.GetChild(0).GetComponent<Floater>();
+        SetFloaterCoords(F1, spawnedObject.transform);
+        F1 =spawnedObject.transform.GetChild(1).GetComponent<Floater>();
+        SetFloaterCoords(F1, spawnedObject.transform);
         
-        if(ObjectAmount <= BuoyCounter) return true;
+        if(objectAmount <= BuoyCounter) return true;
         return Spawn(BuoyCounter);
     }
     private void SetFloaterCoords(Floater floater, Transform parentObj)
@@ -52,15 +79,5 @@ public class ObjectSpawner : MonoBehaviour
         Anchor anchor = floater.anchorPoint;
         anchor.position = new Vector3(anchor.position.x + parentObj.transform.position.x, anchor.position.y + parentObj.transform.position.y, anchor.position.z + parentObj.transform.position.z);
         floater.anchorPoint = anchor;
-    }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
