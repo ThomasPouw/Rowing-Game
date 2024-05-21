@@ -73,8 +73,8 @@
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Editor\Lighting\Shadow\ShadowCascadeGUI.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Editor\Utilities\EditorMaterialQuality.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Editor\LookDev\CameraState.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Editor\Lighting\ProbeVolume\ProbeVolumeUI.Skin.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Editor\Lighting\ProbeVolume\ProbeGIBaking.Invalidation.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Editor\Lighting\ProbeVolume\ProbeVolumeUI.Skin.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Editor\LookDev\EnvironmentLibrary.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Editor\ContextualMenuDispatcher.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.9\Editor\Volume\VolumesPreferences.cs" />
@@ -617,6 +617,10 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Valve.Newtonsoft.Json">
+      <HintPath>Assets\SteamVR\Input\Plugins\JSON.NET\Valve.Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="nunit.framework">

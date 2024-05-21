@@ -72,6 +72,9 @@ MonoBehaviour:
   boxCollider: {fileID: 355903006868663398}
   hitboxOffset: 1
   CollectedLight: {fileID: 2100000, guid: 04df02eabea84bd4e86e6e4b42e8fc52, type: 2}
+  changePlace:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8630508446533775850
 GameObject:
   m_ObjectHideFlags: 0

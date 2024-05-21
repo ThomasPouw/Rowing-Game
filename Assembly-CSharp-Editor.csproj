@@ -559,6 +559,10 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Valve.Newtonsoft.Json">
+      <HintPath>Assets\SteamVR\Input\Plugins\JSON.NET\Valve.Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
       <Private>False</Private>
@@ -1085,6 +1089,8 @@
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj" />
     <ProjectReference Include="Unity.Burst.Editor.csproj" />
+    <ProjectReference Include="SteamVR.csproj" />
+    <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj" />
     <ProjectReference Include="Unity.Rider.Editor.csproj" />
     <ProjectReference Include="Unity.XR.OpenXR.Features.ConformanceAutomation.csproj" />
     <ProjectReference Include="Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.csproj" />
@@ -1099,6 +1105,7 @@
     <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj" />
     <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.csproj" />
     <ProjectReference Include="Unity.XR.Management.Editor.csproj" />
+    <ProjectReference Include="Unity.XR.OpenVR.csproj" />
     <ProjectReference Include="PPv2URPConverters.csproj" />
     <ProjectReference Include="Unity.XR.CoreUtils.Editor.csproj" />
     <ProjectReference Include="Unity.Tutorials.Core.Editor.csproj" />
@@ -1124,16 +1131,19 @@
     <ProjectReference Include="Unity.VisualStudio.Editor.csproj" />
     <ProjectReference Include="UnityEditor.UI.csproj" />
     <ProjectReference Include="Unity.VisualScripting.Core.csproj" />
-    <ProjectReference Include="UnityEngine.SpatialTracking.csproj" />
+    <ProjectReference Include="SteamVR_Input_Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.Core.Editor.csproj" />
+    <ProjectReference Include="UnityEngine.SpatialTracking.csproj" />
     <ProjectReference Include="UnityEngine.UI.csproj" />
     <ProjectReference Include="UnityEditor.XR.LegacyInputHelpers.csproj" />
+    <ProjectReference Include="SteamVR_Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj" />
     <ProjectReference Include="Unity.Timeline.csproj" />
     <ProjectReference Include="Unity.InputSystem.csproj" />
     <ProjectReference Include="Unity.InputSystem.ForUI.csproj" />
     <ProjectReference Include="Unity.XR.Oculus.csproj" />
+    <ProjectReference Include="Unity.XR.OpenVR.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj" />
     <ProjectReference Include="Unity.XR.OpenXR.Editor.csproj" />
     <ProjectReference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.csproj" />
