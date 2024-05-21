@@ -1233,9 +1233,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1681492453}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
-        m_MethodName: SetHorizontal
-        m_Mode: 0
+        m_TargetAssemblyTypeName: RaftSimUI, Assembly-CSharp
+        m_MethodName: SetBuoyPoints
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1248,9 +1248,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1681492453}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
-        m_MethodName: SetHorizontal
-        m_Mode: 0
+        m_TargetAssemblyTypeName: RaftSimUI, Assembly-CSharp
+        m_MethodName: SetBuoyPoints
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1768,7 +1768,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1681492453}
         m_TargetAssemblyTypeName: RaftSimUI, Assembly-CSharp
-        m_MethodName: SetBuoyPoints
+        m_MethodName: SetBuoyAmount
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3794,8 +3794,7 @@ MonoBehaviour:
   RightVRController: {fileID: 15551183}
   LeftMoved: 0
   RightMoved: 0
-  verticalMovementNormal: 0
-  horizontalMovementNormal: 0
+  distance: 0
 --- !u!1 &1516027249
 GameObject:
   m_ObjectHideFlags: 0
@@ -4035,7 +4034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2312051246788192526, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.84000003
+      value: 0.85413975
       objectReference: {fileID: 0}
     - target: {fileID: 2312051246788192526, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4043,7 +4042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2312051246788192526, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2312051246788192526, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4085,6 +4084,10 @@ PrefabInstance:
       propertyPath: FOVField
       value: 
       objectReference: {fileID: 261944835}
+    - target: {fileID: 3542581722605501641, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: VROffset
+      value: 
+      objectReference: {fileID: 1485109917}
     - target: {fileID: 3542581722605501641, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: FOVSlider
       value: 
@@ -4217,6 +4220,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5696295053145622200, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_fontSize
+      value: 21.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5696295053145622200, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6409967920367916989, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4305,6 +4316,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 66f7ca6522d44cd468087430bc479da9, type: 3}
+    - target: {fileID: 7827312723053912291, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_fontSize
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827312723053912291, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7842149987445919588, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.50277776
@@ -4323,7 +4342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8040866771637324291, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.65262634
+      value: 0.69181234
       objectReference: {fileID: 0}
     - target: {fileID: 8040866771637324291, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4331,7 +4350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8040866771637324291, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8040866771637324291, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4339,6 +4358,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8107777344714349400, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246906781282706360, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.085328616
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246906781282706360, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246906781282706360, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246906781282706360, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.08737677
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246906781282706360, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246906781282706360, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246906781282706360, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 13.799988
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246906781282706360, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.099998474
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246906781282706360, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8257399864903193991, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
@@ -4351,7 +4406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8257399864903193991, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.65262634
+      value: 0.69181234
       objectReference: {fileID: 0}
     - target: {fileID: 8257399864903193991, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4359,7 +4414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8257399864903193991, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8257399864903193991, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -6205,9 +6260,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1681492453}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
-        m_MethodName: SetRadius
-        m_Mode: 0
+        m_TargetAssemblyTypeName: RaftSimUI, Assembly-CSharp
+        m_MethodName: SetBuoyAmount
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6220,9 +6275,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1681492453}
-        m_TargetAssemblyTypeName: RevSimUI, Assembly-CSharp
-        m_MethodName: SetRadius
-        m_Mode: 0
+        m_TargetAssemblyTypeName: RaftSimUI, Assembly-CSharp
+        m_MethodName: SetBuoyAmount
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

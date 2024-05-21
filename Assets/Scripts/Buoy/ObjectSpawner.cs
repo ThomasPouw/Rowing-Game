@@ -17,15 +17,15 @@ public class ObjectSpawner : MonoBehaviour
         get {return objectAmount;}
         set 
         {
-            if(value <= objectAmount)
+            Debug.Log(value+ " "+ objectAmount);
+            if(value < objectAmount)
             {
-                List<Transform> objects = SpawnedObjects.GetRange(objectAmount, value - objectAmount);
+                List<Transform> objects = SpawnedObjects.GetRange(objectAmount, objectAmount- value);
                 for (int i = 0; i < objects.Count; i++)
                 {
-                    Destroy(objects[i]);
+                    Destroy(objects[i].gameObject);
                 }
-                SpawnedObjects.RemoveRange(objectAmount, value - objectAmount);
-                objectAmount = value;
+                SpawnedObjects.RemoveRange(objectAmount, objectAmount- value);
             } 
             else
             {
@@ -33,6 +33,7 @@ public class ObjectSpawner : MonoBehaviour
                 objectAmount = value;
                 Spawn(old);
             }
+            objectAmount = value;
         }
     }
     [SerializeField] public float ObjectPoints; //Needs a Getter setter added.
@@ -46,6 +47,11 @@ public class ObjectSpawner : MonoBehaviour
         bounds = new float[4]{min.x, max.x, min.z, max.z};
         Spawn(0);
         
+    }
+
+    public void ChangePlaceEvent(Transform T)
+    {
+        Spawn(objectAmount, T.gameObject);
     }
     /// <summary>
     /// Recursion! Spawns as many version of the object as you ask. The counter is how many items it already has spawned.
@@ -62,6 +68,7 @@ public class ObjectSpawner : MonoBehaviour
         if(spawnedObject == null)
         {
             spawnedObject =Instantiate(prefabOBJ, new Vector3(X, 0, Z), transform.rotation);
+            spawnedObject.transform.GetChild(2).GetComponent<BuoyTriggerCentered>().changePlace.AddListener(ChangePlaceEvent);
             SpawnedObjects.Add(spawnedObject.transform);
             spawnedObject.transform.parent = StoreLocation.transform;
         }

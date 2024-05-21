@@ -138,7 +138,9 @@ public class RaftSimUI : MonoBehaviour
     public void SetBuoyAmount(string value) => SetBuoyAmount(short.Parse(buoyAmountSlider.value.ToString()));
     public void SetBuoyAmount(short value)
     {
+        Debug.Log(buoyAmountSlider.value);
         BuoySpawner.ObjectAmount = value;
+        Debug.Log(BuoySpawner.ObjectAmount);
         UpdateBuoyAmount();
     }
     public void UpdateBuoyAmount()
@@ -149,6 +151,7 @@ public class RaftSimUI : MonoBehaviour
     public void SetBuoyPoints(string value) => SetBuoyPoints(float.Parse(buoyPointSlider.value.ToString()));
     public void SetBuoyPoints(float value)
     {
+        Debug.Log(buoyPointSlider.value);
         BuoySpawner.ObjectPoints = value;
         UpdateBuoyPoints();
     }

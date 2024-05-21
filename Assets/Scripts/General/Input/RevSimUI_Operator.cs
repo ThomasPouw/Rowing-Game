@@ -9,6 +9,7 @@ using YawVR;
 using System.Net;
 using UnityEngine.XR;
 using UnityEditor.XR.LegacyInputHelpers;
+using Unity.XR.CoreUtils;
 
 public class RevSimUI_Operator : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class RevSimUI_Operator : MonoBehaviour
     [SerializeField] private Light lightSource; 
     [SerializeField] private Volume volume;
     private Vignette vg;
-    [SerializeField] private CameraOffset VROffset;
+    [SerializeField] private XROrigin VROffset;
     [SerializeField] private Slider FOVSlider, vignetteSlider, brightnessSlider, heightSlider;
     [SerializeField] private InputField FOVField, vignetteField, brightnessField, heightField; 
 
@@ -232,12 +233,12 @@ public class RevSimUI_Operator : MonoBehaviour
 
     public void UpdateHeight()
     {
-        heightField.text =  VROffset.cameraYOffset.ToString("0.00");
-        heightSlider.value = VROffset.cameraYOffset;
+        heightField.text =  VROffset.CameraYOffset.ToString("0.00");
+        heightSlider.value = VROffset.CameraYOffset;
     }
     public void SetHeight(float value)
     {
-        VROffset.cameraYOffset = value;
+        VROffset.CameraYOffset = value;
         UpdateHeight();
     }
     public void SetHeight(string value) => SetHeight(float.Parse(value));
