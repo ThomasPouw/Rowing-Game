@@ -33,11 +33,13 @@ public class BuoyTriggerCentered : MonoBehaviour
     private void MoveTrigger()
     {
         Quaternion rot = (Buoys[0].rotation * Buoys[1].rotation);
+        float X = ((Buoys[0].position.x + Buoys[1].position.x)/2);
         float Y = ((Buoys[0].position.y + Buoys[1].position.y)/2)+hitboxOffset;
-        transform.position = new Vector3(transform.position.x, Y, transform.position.z);
+        float Z = ((Buoys[0].position.z + Buoys[1].position.z)/2);
+        transform.position = new Vector3(X, Y, transform.position.z);
         transform.rotation = rot;
     }
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerExit(Collider other) {
         Debug.Log(other.name);
         if(other.name == "Boat")
         {

@@ -20,7 +20,7 @@ public class RaftSimUI : MonoBehaviour
     [Header("Buoy Row Setting")]
     [SerializeField] private bool UseBuoyGame;
     [SerializeField] [Description("Its a script called 'ObjectSpawner' as the writer of the script wanted the script to be used in other situations aswell.")]
-    private ObjectSpawner BuoySpawner;
+    private RowingGameLevelManager BuoySpawner;
     [SerializeField] private Slider buoyAmountSlider, buoyPointSlider;
     [SerializeField] private InputField buoyAmountField, buoyPointField;
 

@@ -30,8 +30,11 @@ public class PeddalBoat : MonoBehaviour
     [SerializeField] private Transform RightPaddelPoint;
     [SerializeField] private float RightPaddelAngle;
 
-    [SerializeField] private XRController LeftVRController;
-    [SerializeField] private XRController RightVRController;
+    [Header("VR Information")]
+
+    [SerializeField] private bool isVRControlled; 
+    [SerializeField] private XRInputTranslator xrInput;
+
 
     private Rigidbody rb;
     private float rudderAngle;
@@ -57,6 +60,11 @@ public class PeddalBoat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isVRControlled)
+        {
+            SteeringAngle += xrInput.controller.pos.LeftPosition.normalized.x * Time.deltaTime;
+            SteeringAngle += xrInput.controller.pos.RightPosition.normalized.x * Time.deltaTime;
+        }
         // if (motor.position.y < WaveManager.instance.GetDisplacementFromGPU(motor.position).y)
         //     rb.AddForceAtPosition(motor.forward * motorForce, motor.position, ForceMode.Acceleration);
         if(SteeringAngle != 0)
