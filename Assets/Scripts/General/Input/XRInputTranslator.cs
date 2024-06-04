@@ -31,17 +31,20 @@ public class XRInputTranslator : MonoBehaviour
     private void GetViveControls()
     {
         LeftVRController.inputDevice.TryGetFeatureValue(CommonUsages.devicePosition, out controller.pos.LeftPosition);
-        Debug.Log("Left Controller Primairy in/out: "+ controller.pos.LeftPosition);
+        //Debug.Log("Left Controller Primairy in/out: "+ controller.pos.LeftPosition);
         RightVRController.inputDevice.TryGetFeatureValue(CommonUsages.devicePosition, out controller.pos.RightPosition);
-        Debug.Log("Right Controller Primairy in/out: "+ controller.pos.RightPosition);
+        //Debug.Log("Right Controller Primairy in/out: "+ controller.pos.RightPosition);
         LeftVRController.inputDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out controller.rot.LeftRotation);
-        Debug.Log("Left Controller Primairy rotation: "+ controller.rot.LeftRotation);
+        //Debug.Log("Left Controller Primairy rotation: "+ controller.rot.LeftRotation);
         RightVRController.inputDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out controller.rot.RightRotation);
-        Debug.Log("Right Controller Primairy rotation: "+ controller.rot.RightRotation);
+        //Debug.Log("Right Controller Primairy rotation: "+ controller.rot.RightRotation);
         RightVRController.inputDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out controller.pos.LeftVelocity);
-        Debug.Log("Left Controller Primairy velocity: "+ controller.pos.LeftVelocity);
+        //Debug.Log("Left Controller Primairy velocity: "+ controller.pos.LeftVelocity);
         LeftVRController.inputDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out controller.pos.RightVelocity);
-        Debug.Log("Right Controller Primairy velocity: "+ controller.pos.RightVelocity);
+        //Debug.Log("Right Controller Primairy velocity: "+ controller.pos.RightVelocity);
+        Debug.Log("Left Controller Primairy in/out: "+ controller.pos.LeftPosition+ " Right Controller Primairy in/out: "+ controller.pos.RightPosition+ 
+        "|| Left Controller Primairy rotation: "+ controller.rot.LeftRotation + " Right Controller Primairy rotation: "+ controller.rot.RightRotation+ 
+        "|| Left Controller Primairy velocity: "+ controller.pos.LeftVelocity+ " Right Controller Primairy velocity: "+ controller.pos.RightVelocity);
     }
 }
 [System.Serializable]
