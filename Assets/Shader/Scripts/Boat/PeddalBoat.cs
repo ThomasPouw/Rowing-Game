@@ -30,16 +30,13 @@ public class PeddalBoat : MonoBehaviour
     [SerializeField] private Transform RightPaddelPoint;
     [SerializeField] private float RightPaddelAngle;
 
-    [Header("VR Information")]
 
-    [SerializeField] private bool isVRControlled; 
-    [SerializeField] private XRInputTranslator xrInput;
 
 
     private Rigidbody rb;
     private float rudderAngle;
     private float motorForce;
-    private float timeCount;
+
 
 
     private void OnEnable()
@@ -60,11 +57,6 @@ public class PeddalBoat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isVRControlled)
-        {
-            SteeringAngle += xrInput.controller.pos.LeftPosition.normalized.x * Time.deltaTime;
-            SteeringAngle += xrInput.controller.pos.RightPosition.normalized.x * Time.deltaTime;
-        }
         // if (motor.position.y < WaveManager.instance.GetDisplacementFromGPU(motor.position).y)
         //     rb.AddForceAtPosition(motor.forward * motorForce, motor.position, ForceMode.Acceleration);
         if(SteeringAngle != 0)
@@ -72,7 +64,7 @@ public class PeddalBoat : MonoBehaviour
             if(SteeringAngle > 0)
             {
                 eclipsePeddal(ref LeftPaddelAngle, LeftPaddelAxis, SteeringAngle, true);
-                rudderAngle = isAbleToPaddel(LeftPaddelPoint.position) ? rudderAngle = rudderMaxAngle * SteeringAngle : 0;
+                rudderAngle = isAbleToPaddel(LeftPaddelPoint.position) ? rudderMaxAngle * SteeringAngle : 0;
             }
             else
             {
@@ -123,12 +115,6 @@ public class PeddalBoat : MonoBehaviour
         // Debug.Log($"Steering Input: {value.Get<float>()}");
         //rudder.transform.localRotation = Quaternion.Euler(0f, rudderAngle, 0f); //Will be motion based. Why? Because I like making problems.
         return;
-        /*
-        x=cos(angle)*R;
-
-        y=sin(angle)*R;
-        Steering :D
-        */
     }
     /// <summary>
     /// Calculates the Arc that the pedals go in WASD mode.

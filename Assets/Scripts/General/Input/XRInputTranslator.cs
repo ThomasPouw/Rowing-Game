@@ -11,17 +11,21 @@ public class XRInputTranslator : MonoBehaviour
 
     public bool LeftMoved = false;
     public bool RightMoved = false;
-    public Controller controller;
+    [SerializeField]public Controller controller;
     // Start is called before the first frame update
+    private void OnEnable() 
+    {
+    }
     void Start()
     {
-
+        controller.LeftController = LeftVRController.gameObject;
+        controller.RightController = RightVRController.gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!LeftMoved) return;
+        //if(!LeftMoved) return;
         GetViveControls();
     }
     private void GetViveControls()
@@ -40,11 +44,15 @@ public class XRInputTranslator : MonoBehaviour
         Debug.Log("Right Controller Primairy velocity: "+ controller.pos.RightVelocity);
     }
 }
+[System.Serializable]
 public class Controller
 {
+    public GameObject LeftController;
+    public GameObject RightController;
     public position pos;
     public rotation rot;
 }
+[System.Serializable]
 public class position
 {
     public Vector3 LeftPosition;
@@ -52,6 +60,7 @@ public class position
     public Vector3 RightPosition;
     public Vector3 RightVelocity;
 }
+[System.Serializable]
 public class rotation
 {
     public Quaternion LeftRotation;

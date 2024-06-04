@@ -67,7 +67,6 @@
     <Compile Include="Assets\Shader\Scripts\FishAI.cs" />
     <Compile Include="Assets\Scripts\General\Input\YAW\RotationLimitsPanel.cs" />
     <Compile Include="Assets\Shader\Scripts\WaterManager.cs" />
-    <Compile Include="Assets\Shader\Scripts\Boat\PeddalDetectors.cs" />
     <Compile Include="Assets\Scripts\General\MoveWithOrigin.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\ArrayE.cs" />
     <Compile Include="Assets\YawVR\Sample\ControlSamples\VelocityController.cs" />
@@ -190,6 +189,7 @@
     <Compile Include="Assets\Shader\Scripts\Waves\WaveManager.cs" />
     <Compile Include="Assets\Scripts\General\Input\YAW\SampleYawControllerDelegateImplementation.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\CellularAutomaton\CellularAutomaton.cs" />
+    <Compile Include="Assets\Shader\Scripts\Boat\PeddalBoatVR.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Cylinder.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\MeshDraft.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Dodecahedron.cs" />
@@ -1104,11 +1104,13 @@
     <ProjectReference Include="Unity.XR.Management.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj" />
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj" />
     <ProjectReference Include="Unity.Burst.Editor.csproj" />
     <ProjectReference Include="SteamVR.csproj" />
     <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj" />
     <ProjectReference Include="Unity.Rider.Editor.csproj" />
     <ProjectReference Include="Unity.XR.OpenXR.Features.ConformanceAutomation.csproj" />
+    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj" />
     <ProjectReference Include="Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj" />
@@ -1171,6 +1173,7 @@
     <ProjectReference Include="Unity.Searcher.Editor.csproj" />
     <ProjectReference Include="Unity.XR.OpenXR.Features.RuntimeDebugger.Editor.csproj" />
     <ProjectReference Include="Unity.VisualScripting.State.csproj" />
+    <ProjectReference Include="Cinemachine.csproj" />
     <ProjectReference Include="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
