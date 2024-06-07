@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Anchor
+  - Boat
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ObserverOnly
   - Water
   - UI
   - 

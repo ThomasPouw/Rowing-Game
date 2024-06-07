@@ -53,12 +53,13 @@ public class PeddalBoatVR : MonoBehaviour
     void Update()
     {
         float rudderAngle = 0;
-        if(!SetUpControls)
+        if(!SetUpControls && xrInput.controller.pos.LeftPosition != Vector3.zero)
         {
-            LeftVRControlPoint.transform.position = xrInput.controller.LeftController.transform.position+ new Vector3(0, -0.5f, 0);
-            RightVRControlPoint.transform.position = xrInput.controller.RightController.transform.position+ new Vector3(0, -0.5f, 0);
+            LeftVRControlPoint.transform.position = xrInput.controller.LeftController.transform.position+ new Vector3(0.5f, -0.5f, 0);
+            RightVRControlPoint.transform.position = xrInput.controller.RightController.transform.position+ new Vector3(-0.5f, -0.5f, 0);
             SetUpControls = true;
         }
+        if(!SetUpControls) return;
         //LeftPaddelAxis.LookAt(xrInput.controller.LeftController.transform.position);
         //RightPaddelAxis.LookAt(xrInput.controller.RightController.transform.position);
         if(xrInput.controller.pos.LeftVelocity != Vector3.zero ||  xrInput.controller.pos.RightVelocity != Vector3.zero)

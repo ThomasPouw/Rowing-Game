@@ -42,9 +42,9 @@ public class XRInputTranslator : MonoBehaviour
         //Debug.Log("Left Controller Primairy velocity: "+ controller.pos.LeftVelocity);
         LeftVRController.inputDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out controller.pos.RightVelocity);
         //Debug.Log("Right Controller Primairy velocity: "+ controller.pos.RightVelocity);
-        Debug.Log("Left Controller Primairy in/out: "+ controller.pos.LeftPosition+ " Right Controller Primairy in/out: "+ controller.pos.RightPosition+ 
+        /*Debug.Log("Left Controller Primairy in/out: "+ controller.pos.LeftPosition+ " Right Controller Primairy in/out: "+ controller.pos.RightPosition+ 
         "|| Left Controller Primairy rotation: "+ controller.rot.LeftRotation + " Right Controller Primairy rotation: "+ controller.rot.RightRotation+ 
-        "|| Left Controller Primairy velocity: "+ controller.pos.LeftVelocity+ " Right Controller Primairy velocity: "+ controller.pos.RightVelocity);
+        "|| Left Controller Primairy velocity: "+ controller.pos.LeftVelocity+ " Right Controller Primairy velocity: "+ controller.pos.RightVelocity);*/
     }
 }
 [System.Serializable]
