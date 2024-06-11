@@ -181,6 +181,7 @@
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Boids\BoidController.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Vector2Int.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\StepManager.cs" />
+    <Compile Include="Assets\Shader\Scripts\Sound\RowingSoundManager.cs" />
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\BuildingGenerator\FacadeLayout.cs" />
     <Compile Include="Assets\YawVR\Scripts\Enums.cs" />

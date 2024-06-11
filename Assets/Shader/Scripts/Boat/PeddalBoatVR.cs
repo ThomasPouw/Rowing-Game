@@ -32,7 +32,8 @@ public class PeddalBoatVR : MonoBehaviour
     [SerializeField] private XRInputTranslator xrInput;
     [SerializeField] private GameObject LeftVRControlPoint;
     [SerializeField] private GameObject RightVRControlPoint;
-    private bool SetUpControls = false;
+    [Header("Sound Manager")]
+    [SerializeField] private RowingSoundManager rowingSoundManager;
     
     private Rigidbody rb;
     //private float rudderAngle;
@@ -55,6 +56,13 @@ public class PeddalBoatVR : MonoBehaviour
         float rudderAngle = 0;
         LeftPaddelAxis.transform.LookAt(LeftVRControlPoint.transform);
         RightPaddelAxis.transform.LookAt(RightVRControlPoint.transform);
+        if(xrInput.controller.pos.LeftVelocity != Vector3.zero || xrInput.controller.pos.RightVelocity != Vector3.zero)
+        {
+            if(isAbleToPaddel(LeftPaddelPoint.position))
+                rowingSoundManager.PlaySoundEffect(true);
+            if(isAbleToPaddel(RightPaddelPoint.position))
+                rowingSoundManager.PlaySoundEffect(false);
+        }
 
         /*if(!SetUpControls && xrInput.controller.pos.LeftPosition != Vector3.zero)
         {
@@ -85,6 +93,7 @@ public class PeddalBoatVR : MonoBehaviour
             //}
         //}
        // rudderAngle = isAbleToPaddel(LeftPaddelPoint.position) ?  rudderMaxAngle * SteeringAngle : 0; //I should check this...
+       
         if (floater.floatType == Floater.FloaterType.Ideal)
              IdealMove(motorForce, rudderAngle);
         else if (motor.position.y < WaveManager.instance.GetDisplacementFromGPU(motor.position).y)
@@ -102,7 +111,7 @@ public class PeddalBoatVR : MonoBehaviour
     {
         Vector3 normal = new Vector3();
         Vector3 point = WaveManager.instance.GetDisplacementFromGPU(pos, ref normal);
-        Debug.DrawLine(pos, point);
+        //Debug.DrawLine(pos, point); 
         return pos.y < point.y;
     }
     private void OnDrawGizmos() {
