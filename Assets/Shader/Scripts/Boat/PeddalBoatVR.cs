@@ -53,36 +53,37 @@ public class PeddalBoatVR : MonoBehaviour
     void Update()
     {
         float rudderAngle = 0;
-        if(!SetUpControls && xrInput.controller.pos.LeftPosition != Vector3.zero)
+        LeftPaddelAxis.transform.LookAt(LeftVRControlPoint.transform);
+        RightPaddelAxis.transform.LookAt(RightVRControlPoint.transform);
+
+        /*if(!SetUpControls && xrInput.controller.pos.LeftPosition != Vector3.zero)
         {
             LeftVRControlPoint.transform.position = xrInput.controller.LeftController.transform.position+ new Vector3(0.5f, -0.5f, 0);
             RightVRControlPoint.transform.position = xrInput.controller.RightController.transform.position+ new Vector3(-0.5f, -0.5f, 0);
             SetUpControls = true;
         }
-        if(!SetUpControls) return;
+        if(!SetUpControls) return;*/
         //LeftPaddelAxis.LookAt(xrInput.controller.LeftController.transform.position);
         //RightPaddelAxis.LookAt(xrInput.controller.RightController.transform.position);
-        if(xrInput.controller.pos.LeftVelocity != Vector3.zero ||  xrInput.controller.pos.RightVelocity != Vector3.zero)
-        {
-            if(xrInput.controller.pos.LeftVelocity != Vector3.zero)
-            {
-                LeftVRControlPoint.transform.LookAt(xrInput.controller.LeftController.transform.position);
-                if(xrInput.controller.pos.LeftVelocity.z < 0)
-                    LeftVRControlPoint.transform.rotation = new Quaternion(xrInput.controller.LeftController.transform.rotation.x, xrInput.controller.LeftController.transform.rotation.y, 0, xrInput.controller.LeftController.transform.rotation.w);
-                else
-                    LeftVRControlPoint.transform.rotation = xrInput.controller.LeftController.transform.rotation;
-                rudderAngle += isAbleToPaddel(LeftPaddelPoint.position) ? rudderMaxAngle * Vector3.Distance(xrInput.controller.pos.LeftVelocity.normalized, Vector3.zero) : 0; 
-            }
-            else
-            {
-                RightVRControlPoint.transform.LookAt(xrInput.controller.LeftController.transform.position);
-                if(xrInput.controller.pos.RightVelocity.z < 0)
-                    RightVRControlPoint.transform.rotation = new Quaternion(xrInput.controller.RightController.transform.rotation.x, xrInput.controller.RightController.transform.rotation.y, 0, xrInput.controller.RightController.transform.rotation.w);
-                else
-                    RightVRControlPoint.transform.rotation = xrInput.controller.RightController.transform.rotation;
-                rudderAngle -= isAbleToPaddel(RightPaddelPoint.position) ?  rudderMaxAngle * Vector3.Distance(xrInput.controller.pos.RightVelocity.normalized, Vector3.zero) : 0; 
-            }
-        }
+        //if(xrInput.controller.pos.LeftVelocity != Vector3.zero ||  xrInput.controller.pos.RightVelocity != Vector3.zero)
+        //{
+            //if(xrInput.controller.pos.LeftVelocity != Vector3.zero)
+            //{
+                //if(xrInput.controller.pos.LeftVelocity.z < 0)
+                    //LeftVRControlPoint.transform.rotation = new Quaternion(xrInput.controller.LeftController.transform.rotation.x, xrInput.controller.LeftController.transform.rotation.y, 0, xrInput.controller.LeftController.transform.rotation.w);
+                //else
+                    //LeftVRControlPoint.transform.rotation = xrInput.controller.LeftController.transform.rotation;
+                //rudderAngle += isAbleToPaddel(LeftPaddelPoint.position) ? rudderMaxAngle * Vector3.Distance(xrInput.controller.pos.LeftVelocity.normalized, Vector3.zero) : 0; 
+           // }
+            //else
+           // {
+                //if(xrInput.controller.pos.RightVelocity.z < 0)
+                //    RightVRControlPoint.transform.rotation = new Quaternion(xrInput.controller.RightController.transform.rotation.x, xrInput.controller.RightController.transform.rotation.y, 0, xrInput.controller.RightController.transform.rotation.w);
+               // else
+               //     RightVRControlPoint.transform.rotation = xrInput.controller.RightController.transform.rotation;
+               // rudderAngle -= isAbleToPaddel(RightPaddelPoint.position) ?  rudderMaxAngle * Vector3.Distance(xrInput.controller.pos.RightVelocity.normalized, Vector3.zero) : 0; 
+            //}
+        //}
        // rudderAngle = isAbleToPaddel(LeftPaddelPoint.position) ?  rudderMaxAngle * SteeringAngle : 0; //I should check this...
         if (floater.floatType == Floater.FloaterType.Ideal)
              IdealMove(motorForce, rudderAngle);

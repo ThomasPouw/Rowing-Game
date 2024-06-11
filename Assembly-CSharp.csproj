@@ -143,6 +143,7 @@
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Prism.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Breakout\Breakout.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\BuildingGenerator\VerticalLayout.cs" />
+    <Compile Include="Assets\Scripts\General\TestMotion.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Icosahedron.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Directions.cs" />
     <Compile Include="Assets\YawVR\Sample\BatteryLevelUI.cs" />
