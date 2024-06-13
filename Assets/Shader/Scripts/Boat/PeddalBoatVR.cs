@@ -70,10 +70,10 @@ public class PeddalBoatVR : MonoBehaviour
             motorForce = acceleration * (xrInput.controller.pos.LeftVelocity.z) * Mathf.Cos(Mathf.Deg2Rad * rudderAngle); 
             rudderAngle = rudderMaxAngle * xrInput.controller.pos.LeftVelocity.z;
         }
-        else
+        else if(right)
         {
             rowingSoundManager.PlaySoundEffect(false);
-            motorForce = acceleration * (xrInput.controller.pos.RightVelocity.z) * Mathf.Cos(Mathf.Deg2Rad * rudderAngle);
+            motorForce = acceleration * (-xrInput.controller.pos.RightVelocity.z) * Mathf.Cos(Mathf.Deg2Rad * rudderAngle);
             rudderAngle = rudderMaxAngle * xrInput.controller.pos.LeftVelocity.z;
         }
 
