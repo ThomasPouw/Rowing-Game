@@ -90,7 +90,6 @@ public class RowingGameLevelManager : MonoBehaviour
         spawnedObject.transform.position = new Vector3(X, 0, Z);
         spawnedObject.transform.rotation = Quaternion.Euler(0,Angle, 0);
         List<Floater> TempFloater = spawnedObject.transform.GetComponentsInChildren<Floater>().ToList();
-        //Change this to keep in mind rotation.
         for (int i = 0; i < TempFloater.Count; i++)
         {
             Floater F1 =TempFloater[i].GetComponent<Floater>();

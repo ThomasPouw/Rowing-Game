@@ -56,12 +56,25 @@ public class PeddalBoatVR : MonoBehaviour
         float rudderAngle = 0;
         LeftPaddelAxis.transform.LookAt(LeftVRControlPoint.transform);
         RightPaddelAxis.transform.LookAt(RightVRControlPoint.transform);
-        if(xrInput.controller.pos.LeftVelocity != Vector3.zero || xrInput.controller.pos.RightVelocity != Vector3.zero)
+        bool left = isAbleToPaddel(LeftPaddelPoint.position);
+        bool right = isAbleToPaddel(RightPaddelPoint.position);
+        if(left && right)
         {
-            if(isAbleToPaddel(LeftPaddelPoint.position))
-                rowingSoundManager.PlaySoundEffect(true);
-            if(isAbleToPaddel(RightPaddelPoint.position))
-                rowingSoundManager.PlaySoundEffect(false);
+            rowingSoundManager.PlaySoundEffect(true);
+            rowingSoundManager.PlaySoundEffect(false);
+            motorForce = acceleration * (xrInput.controller.pos.LeftVelocity.z+ xrInput.controller.pos.RightVelocity.z) * Mathf.Cos(Mathf.Deg2Rad * rudderAngle); 
+        }
+        else if(left)
+        {
+            rowingSoundManager.PlaySoundEffect(true);
+            motorForce = acceleration * (xrInput.controller.pos.LeftVelocity.z) * Mathf.Cos(Mathf.Deg2Rad * rudderAngle); 
+            rudderAngle = rudderMaxAngle * xrInput.controller.pos.LeftVelocity.z;
+        }
+        else
+        {
+            rowingSoundManager.PlaySoundEffect(false);
+            motorForce = acceleration * (xrInput.controller.pos.RightVelocity.z) * Mathf.Cos(Mathf.Deg2Rad * rudderAngle);
+            rudderAngle = rudderMaxAngle * xrInput.controller.pos.LeftVelocity.z;
         }
 
         /*if(!SetUpControls && xrInput.controller.pos.LeftPosition != Vector3.zero)
