@@ -15,11 +15,12 @@ public class TestMotion : MonoBehaviour
     void Start()
     {
         RowPedalCoords = transform.localPosition;
+        transform.position = RowPedalCoords + Extention;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = RowPedalCoords + Extention + new Vector3(RangeRowX,RangeRowY, RangeRowZ);
+        //transform.position = RowPedalCoords + Extention + new Vector3(RangeRowX,RangeRowY, RangeRowZ);
     }
 }
