@@ -30,6 +30,7 @@ public class PeddalBoatVR : MonoBehaviour
     [SerializeField] private float RightPaddelAngle;
     [Header("VR Information")]
     [SerializeField] private XRInputTranslator xrInput;
+    [SerializeField] private PedalBounds pedalBounds;
     [SerializeField] private GameObject LeftVRControlPoint;
     [SerializeField] private GameObject RightVRControlPoint;
     [Header("Sound Manager")]
@@ -54,8 +55,13 @@ public class PeddalBoatVR : MonoBehaviour
     void Update()
     {
         float rudderAngle = 0;
-        LeftPaddelAxis.transform.LookAt(LeftVRControlPoint.transform);
-        RightPaddelAxis.transform.LookAt(RightVRControlPoint.transform);
+        //ClampTransform(LeftPaddelAxis.transform, LeftPaddelPoint.transform, new Vector3(0,0,0), new Vector3(40,40,40));
+        //ClampTransform(RightPaddelAxis.transform, RightVRControlPoint.transform, new Vector3(320,120,0), new Vector3(360,240,0));
+        //Debug.Log(LeftPaddelPoint.transform);
+        if(pedalBounds.isPedalInBox(LeftVRControlPoint.transform))
+            LeftPaddelAxis.transform.LookAt(LeftVRControlPoint.transform);
+        if(pedalBounds.isPedalInBox(RightVRControlPoint.transform))
+            RightPaddelAxis.transform.LookAt(RightVRControlPoint.transform);
         bool left = isAbleToPaddel(LeftPaddelPoint.position);
         bool right = isAbleToPaddel(RightPaddelPoint.position);
         if(left && right)
@@ -76,36 +82,6 @@ public class PeddalBoatVR : MonoBehaviour
             motorForce = acceleration * (-xrInput.controller.pos.RightVelocity.z) * Mathf.Cos(Mathf.Deg2Rad * rudderAngle);
             rudderAngle = rudderMaxAngle * xrInput.controller.pos.LeftVelocity.z;
         }
-
-        /*if(!SetUpControls && xrInput.controller.pos.LeftPosition != Vector3.zero)
-        {
-            LeftVRControlPoint.transform.position = xrInput.controller.LeftController.transform.position+ new Vector3(0.5f, -0.5f, 0);
-            RightVRControlPoint.transform.position = xrInput.controller.RightController.transform.position+ new Vector3(-0.5f, -0.5f, 0);
-            SetUpControls = true;
-        }
-        if(!SetUpControls) return;*/
-        //LeftPaddelAxis.LookAt(xrInput.controller.LeftController.transform.position);
-        //RightPaddelAxis.LookAt(xrInput.controller.RightController.transform.position);
-        //if(xrInput.controller.pos.LeftVelocity != Vector3.zero ||  xrInput.controller.pos.RightVelocity != Vector3.zero)
-        //{
-            //if(xrInput.controller.pos.LeftVelocity != Vector3.zero)
-            //{
-                //if(xrInput.controller.pos.LeftVelocity.z < 0)
-                    //LeftVRControlPoint.transform.rotation = new Quaternion(xrInput.controller.LeftController.transform.rotation.x, xrInput.controller.LeftController.transform.rotation.y, 0, xrInput.controller.LeftController.transform.rotation.w);
-                //else
-                    //LeftVRControlPoint.transform.rotation = xrInput.controller.LeftController.transform.rotation;
-                //rudderAngle += isAbleToPaddel(LeftPaddelPoint.position) ? rudderMaxAngle * Vector3.Distance(xrInput.controller.pos.LeftVelocity.normalized, Vector3.zero) : 0; 
-           // }
-            //else
-           // {
-                //if(xrInput.controller.pos.RightVelocity.z < 0)
-                //    RightVRControlPoint.transform.rotation = new Quaternion(xrInput.controller.RightController.transform.rotation.x, xrInput.controller.RightController.transform.rotation.y, 0, xrInput.controller.RightController.transform.rotation.w);
-               // else
-               //     RightVRControlPoint.transform.rotation = xrInput.controller.RightController.transform.rotation;
-               // rudderAngle -= isAbleToPaddel(RightPaddelPoint.position) ?  rudderMaxAngle * Vector3.Distance(xrInput.controller.pos.RightVelocity.normalized, Vector3.zero) : 0; 
-            //}
-        //}
-       // rudderAngle = isAbleToPaddel(LeftPaddelPoint.position) ?  rudderMaxAngle * SteeringAngle : 0; //I should check this...
        
         if (floater.floatType == Floater.FloaterType.Ideal)
              IdealMove(motorForce, rudderAngle);
@@ -130,5 +106,17 @@ public class PeddalBoatVR : MonoBehaviour
     private void OnDrawGizmos() {
        // Gizmos.color = Color.blue;
        // Gizmos.DrawLine(RightPaddelAxis.position, xrInput.controller.RightController.transform.position);
+    }
+    private void ClampTransform(Transform PedalAxis, Transform VRPoint, Vector3 minClamp, Vector3 maxClamp)
+    {
+        PedalAxis.LookAt(VRPoint);
+        Debug.Log(PedalAxis.gameObject.name+" "+PedalAxis.rotation.eulerAngles);
+        Quaternion newQuat = PedalAxis.rotation;
+        newQuat.eulerAngles = new Vector3(
+            Mathf.Clamp(PedalAxis.rotation.x, minClamp.x, maxClamp.x), 
+            Mathf.Clamp(PedalAxis.rotation.y, minClamp.y, maxClamp.y), 
+            Mathf.Clamp(PedalAxis.rotation.z, minClamp.z, maxClamp.z));
+        PedalAxis.rotation = newQuat;
+
     }
 }
