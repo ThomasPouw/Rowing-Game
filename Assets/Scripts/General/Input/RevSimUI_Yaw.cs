@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using YawVR;
 using System.Net;
 
@@ -16,7 +17,7 @@ public class RevSimUI_Yaw : MonoBehaviour, YawControllerDelegate
     [SerializeField] private GameObject  yawDeviceListItem;
     [SerializeField] private Button connectYawButton;
     [SerializeField] private List<Button> startYawButton = new List<Button>(), stopYawButton = new List<Button>();
-    [SerializeField] private Text yawConnectedDeviceText, yawErrorText, yawIPText, yawUDPText, yawTCPText;
+    [SerializeField] private TMP_Text yawConnectedDeviceText, yawErrorText, yawIPText, yawUDPText, yawTCPText;
     
     private Text connectText;
     private int? udpPort = 50010;
