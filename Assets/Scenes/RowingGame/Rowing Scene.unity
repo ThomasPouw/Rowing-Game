@@ -5549,7 +5549,7 @@ PrefabInstance:
     - target: {fileID: 4838984192002946289, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: yawConnectedDeviceText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 327960991}
     - target: {fileID: 4838984192002946289, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
       propertyPath: stopYawButton.Array.size
       value: 2
