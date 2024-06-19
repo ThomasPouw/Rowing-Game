@@ -33,15 +33,15 @@ public class PedalBounds : MonoBehaviour
     void Update()
     {
         //Compansate with rotation!
-        downPoint = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
-        upPoint = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, BoxBound.y/2, BoxBound.z/2));
+        downPoint = transform.position+parent.transform.localRotation *( new Vector3(-BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
+        upPoint = transform.position+parent.transform.localRotation *(new Vector3(BoxBound.x/2, BoxBound.y/2, BoxBound.z/2));
         //Get all the combinations :D
-        Up1 = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, BoxBound.y/2, -BoxBound.z/2));
-        Up2 = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, BoxBound.y/2, -BoxBound.z/2));
-        Up3 = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, BoxBound.y/2, BoxBound.z/2));
-        Down1 = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
-        Down2 = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
-        Down3 = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
+        Up1 = transform.position+parent.transform.localRotation *(new Vector3(BoxBound.x/2, BoxBound.y/2, -BoxBound.z/2));
+        Up2 = transform.position+parent.transform.localRotation *(new Vector3(-BoxBound.x/2, BoxBound.y/2, -BoxBound.z/2));
+        Up3 = transform.position+parent.transform.localRotation *( new Vector3(-BoxBound.x/2, BoxBound.y/2, BoxBound.z/2));
+        Down1 = transform.position+parent.transform.localRotation *(new Vector3(BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
+        Down2 = transform.position+parent.transform.localRotation *( new Vector3(BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
+        Down3 = transform.position+parent.transform.localRotation *( new Vector3(-BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
         if(downPoint == null || upPoint == null || Up1 == null || Up2 == null || Up3 == null || Down1 == null || Down2 == null || Down3 == null)
         {
             Debug.LogError("PedalBounds forgot where the bounds are. " + (System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy")));
@@ -74,15 +74,15 @@ public class PedalBounds : MonoBehaviour
         if(Application.isEditor)
         {
             //Compansate with rotation!
-            downPoint = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
-            upPoint = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, BoxBound.y/2, BoxBound.z/2));
+            downPoint = transform.position+parent.transform.localRotation *( new Vector3(-BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
+            upPoint = transform.position+parent.transform.localRotation *(new Vector3(BoxBound.x/2, BoxBound.y/2, BoxBound.z/2));
             //Get all the combinations :D
-            Up1 = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, BoxBound.y/2, -BoxBound.z/2));
-            Up2 = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, BoxBound.y/2, -BoxBound.z/2));
-            Up3 = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, BoxBound.y/2, BoxBound.z/2));
-            Down1 = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
-            Down2 = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
-            Down3 = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
+            Up1 = transform.position+parent.transform.localRotation *(new Vector3(BoxBound.x/2, BoxBound.y/2, -BoxBound.z/2));
+            Up2 = transform.position+parent.transform.localRotation *(new Vector3(-BoxBound.x/2, BoxBound.y/2, -BoxBound.z/2));
+            Up3 = transform.position+parent.transform.localRotation *( new Vector3(-BoxBound.x/2, BoxBound.y/2, BoxBound.z/2));
+            Down1 = transform.position+parent.transform.localRotation *(new Vector3(BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
+            Down2 = transform.position+parent.transform.localRotation *( new Vector3(BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
+            Down3 = transform.position+parent.transform.localRotation *( new Vector3(-BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
         }
  
 
