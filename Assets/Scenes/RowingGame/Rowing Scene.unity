@@ -1524,7 +1524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpLeftPoint: {fileID: 1551623590}
   DownRightPoint: {fileID: 650491027}
-  BoxBound: {x: 1.4, y: 1.65, z: 2}
+  BoxBound: {x: 2, y: 1.65, z: 2}
 --- !u!114 &395198182 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 36590949030129869, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
@@ -3733,15 +3733,15 @@ PrefabInstance:
     - target: {fileID: 3454100097702542713, guid: 72f3ae80803d20c43ba4cdec083e6eb8, type: 3}
       propertyPath: leftController
       value: 
-      objectReference: {fileID: 1800357679}
+      objectReference: {fileID: 0}
     - target: {fileID: 3454100097702542713, guid: 72f3ae80803d20c43ba4cdec083e6eb8, type: 3}
       propertyPath: rightController
       value: 
-      objectReference: {fileID: 15551178}
+      objectReference: {fileID: 0}
     - target: {fileID: 3454100097702542713, guid: 72f3ae80803d20c43ba4cdec083e6eb8, type: 3}
       propertyPath: cameraOffsetTransform
       value: 
-      objectReference: {fileID: 852841740}
+      objectReference: {fileID: 0}
     - target: {fileID: 3841022671780357429, guid: 72f3ae80803d20c43ba4cdec083e6eb8, type: 3}
       propertyPath: m_Name
       value: YawController
@@ -8955,6 +8955,7 @@ MonoBehaviour:
   audioSourceLeftPedal: {fileID: 1832492206}
   audioSourceRightPedal: {fileID: 120179304}
   isInUse: 1
+  hasMusic: 0
 --- !u!1 &2144844951
 GameObject:
   m_ObjectHideFlags: 0

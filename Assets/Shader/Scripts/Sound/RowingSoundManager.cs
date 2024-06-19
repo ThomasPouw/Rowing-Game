@@ -12,11 +12,13 @@ public class RowingSoundManager : MonoBehaviour
     [SerializeField] private AudioSource audioSourceLeftPedal;
     [SerializeField] private AudioSource audioSourceRightPedal;
     [SerializeField] private bool isInUse;
+    [SerializeField] private bool hasMusic;
 
     // Start is called before the first frame update
     void Start()
     {
         isInUse = false;
+        hasMusic = rowingSoundClips.Count != 0;
     }
 
     // Update is called once per frame
@@ -26,7 +28,7 @@ public class RowingSoundManager : MonoBehaviour
     }
     public void PlaySoundEffect(bool isLeftPedal)
     {
-        if(!isInUse)
+        if(!isInUse && hasMusic)
         {
             isInUse = true;
             StartCoroutine(IPlaySoundEffect(isLeftPedal));
