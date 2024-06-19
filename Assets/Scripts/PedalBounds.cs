@@ -42,6 +42,11 @@ public class PedalBounds : MonoBehaviour
         Down1 = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
         Down2 = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
         Down3 = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
+        if(downPoint == null || upPoint == null || Up1 == null || Up2 == null || Up3 == null || Down1 == null || Down2 == null || Down3 == null)
+        {
+            Debug.LogError("PedalBounds forgot where the bounds are. " + (System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy")));
+            Debug.LogError($"{downPoint == null} || {upPoint == null} || {Up1 == null} || {Up2 == null} || {Up3 == null} || {Down1 == null} || {Down2 == null} || {Down3 == null}");
+        }
     }
     public bool isPedalInBox(Transform pedalTransform)
     {
