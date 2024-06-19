@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PedalBounds : MonoBehaviour
 {
-    public Transform UpLeftPoint;
-    public Transform DownRightPoint;
+    //public Transform UpLeftPoint;
+    //public Transform DownRightPoint;
     private Transform parent;
     [SerializeField] private Vector3 BoxBound;
     private Vector3 downPoint;
@@ -65,6 +65,19 @@ public class PedalBounds : MonoBehaviour
         if(parent == null)
         {
             parent = transform.parent;
+        }
+        if(Application.isEditor)
+        {
+            //Compansate with rotation!
+            downPoint = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
+            upPoint = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, BoxBound.y/2, BoxBound.z/2));
+            //Get all the combinations :D
+            Up1 = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, BoxBound.y/2, -BoxBound.z/2));
+            Up2 = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, BoxBound.y/2, -BoxBound.z/2));
+            Up3 = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, BoxBound.y/2, BoxBound.z/2));
+            Down1 = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
+            Down2 = parent.transform.rotation *(transform.position+ new Vector3(BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
+            Down3 = parent.transform.rotation *(transform.position+ new Vector3(-BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
         }
  
 

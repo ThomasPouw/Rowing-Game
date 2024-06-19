@@ -1522,9 +1522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9baf7b387e1a2254a87e5f39fea19edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpLeftPoint: {fileID: 1551623590}
-  DownRightPoint: {fileID: 650491027}
-  BoxBound: {x: 2, y: 1.65, z: 2}
+  BoxBound: {x: 3, y: 1.65, z: 4}
 --- !u!114 &395198182 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 36590949030129869, guid: 67f0aec2a48e1b84da88428dfd1f0561, type: 3}
