@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PedalBounds : MonoBehaviour
+public class BoatBounds : MonoBehaviour
 {
-    //public Transform UpLeftPoint;
-    //public Transform DownRightPoint;
+    [SerializeField] private float AmountChecksOnLine;
+    [SerializeField] private float CheckLengthX;
+    [SerializeField] private float CheckLengthY;
+    [SerializeField] private float CheckLengthZ;
+    [SerializeField] private Terrain terrain;
     private Transform parent;
     [SerializeField] private Vector3 BoxBound;
     private Vector3 downPoint;
@@ -17,21 +20,19 @@ public class PedalBounds : MonoBehaviour
     private Vector3 Down2;
     private Vector3 Down3;
 
-    //Go to the oriantation of the VR glasses and the turn 90 degrees to the right. That is the oriantation I am looking at.
-    //[SerializeField] private bool isUpLeftXBigger;
-    //[SerializeField] private bool isUpLeftYBigger;
-    //[SerializeField] private bool isUpLeftZBigger;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        if(parent == null)
-            parent = transform.parent;
+        CheckLengthX = BoxBound.x / AmountChecksOnLine;
+        CheckLengthY = BoxBound.y / AmountChecksOnLine;
+        CheckLengthZ = BoxBound.z / AmountChecksOnLine;
     }
-
     // Update is called once per frame
     void Update()
     {
+        if(parent == null)
+        {
+            parent = transform.parent;
+        }
         //Compansate with rotation!
         downPoint = transform.position+parent.transform.localRotation *( new Vector3(-BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
         upPoint = transform.position+parent.transform.localRotation *(new Vector3(BoxBound.x/2, BoxBound.y/2, BoxBound.z/2));
@@ -42,30 +43,26 @@ public class PedalBounds : MonoBehaviour
         Down1 = transform.position+parent.transform.localRotation *(new Vector3(BoxBound.x/2, -BoxBound.y/2, -BoxBound.z/2));
         Down2 = transform.position+parent.transform.localRotation *( new Vector3(BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
         Down3 = transform.position+parent.transform.localRotation *( new Vector3(-BoxBound.x/2, -BoxBound.y/2, BoxBound.z/2));
-        if(downPoint == null || upPoint == null || Up1 == null || Up2 == null || Up3 == null || Down1 == null || Down2 == null || Down3 == null)
-        {
-            Debug.LogError("PedalBounds forgot where the bounds are. " + (System.DateTime.UtcNow.ToString("HH:mm dd MMMM, yyyy")));
-            Debug.LogError($"{downPoint == null} || {upPoint == null} || {Up1 == null} || {Up2 == null} || {Up3 == null} || {Down1 == null} || {Down2 == null} || {Down3 == null}");
-        }
     }
-    public bool isPedalInBox(Transform pedalTransform)
+    public bool isTouchingMountain()
     {
-        //Vector3 downPoint = parent.transform.rotation * DownRightPoint.position;
-        //Vector3 upPoint = parent.transform.rotation * UpLeftPoint.position;
-        //Debug.Log("X Condition: "+ (downPoint.x < pedalTransform.position.x) + ", "+ (upPoint.x > pedalTransform.position.x) + " "+ (downPoint.x < pedalTransform.position.x && upPoint.x > pedalTransform.position.x));
-        //Debug.Log("Y Condition: "+ (downPoint.y < pedalTransform.position.y) + ", "+ (upPoint.y > pedalTransform.position.y) + " "+ (downPoint.y < pedalTransform.position.y && upPoint.y > pedalTransform.position.y));
-       // Debug.Log("Z Condition: "+ (downPoint.z < pedalTransform.position.z) + ", "+ (upPoint.z > pedalTransform.position.z) + " "+ (downPoint.z < pedalTransform.position.z && upPoint.z > pedalTransform.position.z));
-       // Debug.Log(pedalTransform.gameObject.name+" here!"+ pedalTransform.position+ "BoundBox: "+ downPoint+ " "+ upPoint);
-        if(!(downPoint.x < pedalTransform.position.x && upPoint.x > pedalTransform.position.x))
-            return false;
-        if(!(downPoint.y < pedalTransform.position.y && upPoint.y > pedalTransform.position.y))
-            return false;
-        if(!(downPoint.z < pedalTransform.position.z && upPoint.z > pedalTransform.position.z))
-            return false;
-        Debug.DrawLine(pedalTransform.position, pedalTransform.position + (Vector3.up *5), Color.green);
-        return true;
+        for (int i = 0; i < CheckLengthX; i++)
+        {
+            for (int ii = 0; ii < CheckLengthY; ii++)
+            {
+                for (int iii = 0; iii < CheckLengthZ; iii++)
+                {
+                    Vector3 sample = downPoint+parent.transform.localRotation *(new Vector3(CheckLengthX*i, CheckLengthY*ii, CheckLengthZ*ii));
+                    Debug.DrawLine(sample, sample + new Vector3(0.1f, 0.1f, 0.1f), Color.yellow);
+                    if((terrain.SampleHeight(sample)) +terrain.transform.position.y > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
-
     private void OnDrawGizmos() {
         if(parent == null)
         {
@@ -86,7 +83,7 @@ public class PedalBounds : MonoBehaviour
         }
  
 
-        Gizmos.color = Color.magenta;
+        Gizmos.color = Color.red;
 
         Gizmos.DrawLine(upPoint, Up1);
         Gizmos.DrawLine(Up1, Up2);

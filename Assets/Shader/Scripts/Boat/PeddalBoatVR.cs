@@ -17,17 +17,12 @@ public class PeddalBoatVR : MonoBehaviour
     [SerializeField] private Floater floater;
 
 
-    [Header("Paddel References")]
-    [SerializeField] private float SteeringAngle;
-    [SerializeField] private float PedalSpeed;
-    [SerializeField] private Transform LeftPaddelAxis;
-    [SerializeField] private Transform LeftPaddelPoint;
+    //[Header("Paddel References")]
+    [SerializeField]private Transform LeftPaddelAxis;
+    [SerializeField]private Transform LeftPaddelPoint;
 
-    [SerializeField] private float LeftPaddelAngle;
-
-    [SerializeField] private Transform RightPaddelAxis;
-    [SerializeField] private Transform RightPaddelPoint;
-    [SerializeField] private float RightPaddelAngle;
+    [SerializeField]private Transform RightPaddelAxis;
+    [SerializeField]private Transform RightPaddelPoint;
     [Header("VR Information")]
     [SerializeField] private XRInputTranslator xrInput;
     [SerializeField] private PedalBounds pedalBounds;

@@ -88,6 +88,7 @@
     <Compile Include="Assets\YawVR\Scripts\YawController.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\BooleanToggleVisualsController.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\BuildingGenerator\ProceduralFacadePanels.cs" />
+    <Compile Include="Assets\Scripts\Boat\PedalBounds.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Tetrahedron.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Spheroid.cs" />
     <Compile Include="Assets\YawVR\Scripts\ActionBus.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Directions.cs" />
     <Compile Include="Assets\YawVR\Sample\BatteryLevelUI.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Teardrop.cs" />
+    <Compile Include="Assets\Scripts\Boat\BoatBounds.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\ChairGenerator\ChairGenerator.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Primitives\Sphere.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\Common\SkyBoxGenerator.cs" />
@@ -161,7 +163,6 @@
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\MeshE.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\BuildingGenerator\HorizontalLayout.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\Examples\BuildingGenerator\BuildingGeneratorBase.cs" />
-    <Compile Include="Assets\Scripts\PedalBounds.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\DebugE.cs" />
     <Compile Include="Assets\Scripts\General\Input\RaftSimUI.cs" />
     <Compile Include="Assets\YawVR\ThirdParty\ProceduralToolkit\MeshDraftPrimitives.cs" />

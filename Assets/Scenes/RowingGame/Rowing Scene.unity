@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17317794, g: 0.2078286, b: 0.24946569, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8851,20 +8851,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1624878097e7f5b4eb1878e146e58a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 10
+  speedMod: 10
   rudderMaxAngle: 40
   rotationSpeed: 2
   rudder: {fileID: 1394332340}
   motor: {fileID: 1684043015}
   floater: {fileID: 0}
-  SteeringAngle: 0
-  PedalSpeed: 0
   LeftPaddelAxis: {fileID: 1643557366}
   LeftPaddelPoint: {fileID: 0}
-  LeftPaddelAngle: 0
   RightPaddelAxis: {fileID: 2071479743}
   RightPaddelPoint: {fileID: 0}
-  RightPaddelAngle: 0
   xrInput: {fileID: 1485109919}
   pedalBounds: {fileID: 344637351}
   LeftVRControlPoint: {fileID: 783603083}
