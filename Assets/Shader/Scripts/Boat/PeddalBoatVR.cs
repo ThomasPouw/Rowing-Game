@@ -28,8 +28,7 @@ public class PeddalBoatVR : MonoBehaviour
     [SerializeField] private PedalBounds pedalBounds;
     [SerializeField] private GameObject LeftVRControlPoint;
     [SerializeField] private GameObject RightVRControlPoint;
-    private Vector3 lastLeftVelocity;
-    private Vector3 lastRightVelocity;
+    private bool isAbleToRow = false;
     [Header("Sound Manager")]
     [SerializeField] private RowingSoundManager rowingSoundManager;
     
@@ -43,10 +42,6 @@ public class PeddalBoatVR : MonoBehaviour
         RightPaddelPoint = RightPaddelAxis.GetChild(0).GetChild(0).transform;
         LeftPaddelPoint = LeftPaddelAxis.GetChild(0).GetChild(0).transform;
     }
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -59,32 +54,26 @@ public class PeddalBoatVR : MonoBehaviour
             LeftPaddelAxis.transform.LookAt(LeftVRControlPoint.transform);
         if(pedalBounds.isPedalInBox(RightVRControlPoint.transform))
             RightPaddelAxis.transform.LookAt(RightVRControlPoint.transform);
+        if(isAbleToRow)
+            return;
         bool left = isAbleToPaddel(LeftPaddelPoint.position);
         bool right = isAbleToPaddel(RightPaddelPoint.position);
         if(left && right)
         {
             rowingSoundManager.PlaySoundEffect(true);
             rowingSoundManager.PlaySoundEffect(false);
-            Vector3 leftAcceleration = (xrInput.controller.pos.LeftVelocity- lastLeftVelocity);
-            Vector3 rightAcceleration = (xrInput.controller.pos.RightVelocity- lastRightVelocity);
-            lastLeftVelocity = xrInput.controller.pos.LeftVelocity;
-            lastRightVelocity = xrInput.controller.pos.RightVelocity;
 
             motorForce = speedMod * (xrInput.controller.pos.LeftVelocity.z+ xrInput.controller.pos.RightVelocity.z) * Mathf.Cos(Mathf.Deg2Rad * rudderAngle); 
         }
         else if(left)
         {
             rowingSoundManager.PlaySoundEffect(true);
-            Vector3 leftAcceleration = (xrInput.controller.pos.LeftVelocity- lastLeftVelocity);
-            lastLeftVelocity = xrInput.controller.pos.LeftVelocity;
             motorForce = speedMod * (xrInput.controller.pos.LeftVelocity.z) * Mathf.Cos(Mathf.Deg2Rad * rudderAngle); 
             rudderAngle = rudderMaxAngle * (xrInput.controller.pos.LeftVelocity.z);
         }
         else if(right)
         {
             rowingSoundManager.PlaySoundEffect(false);
-            Vector3 rightAcceleration = (xrInput.controller.pos.RightVelocity- lastRightVelocity);
-            lastRightVelocity = xrInput.controller.pos.RightVelocity;
             motorForce = speedMod * -(xrInput.controller.pos.RightVelocity.z) * Mathf.Cos(Mathf.Deg2Rad * rudderAngle);
             rudderAngle = rudderMaxAngle * -(xrInput.controller.pos.RightVelocity.z);
         }
@@ -93,6 +82,10 @@ public class PeddalBoatVR : MonoBehaviour
              IdealMove(motorForce, rudderAngle);
         else if (motor.position.y < WaveManager.instance.GetDisplacementFromGPU(motor.position).y)
             rb.AddForceAtPosition(rudder.forward * motorForce, motor.position, ForceMode.Acceleration);
+    }
+    public void isAbleToMove()
+    {
+        isAbleToRow = !isAbleToRow;
     }
 
     private void IdealMove(float speed, float rudderAngle)
