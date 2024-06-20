@@ -86,7 +86,7 @@ public class PeddalBoatVR : MonoBehaviour
             Vector3 rightAcceleration = (xrInput.controller.pos.RightVelocity- lastRightVelocity);
             lastRightVelocity = xrInput.controller.pos.RightVelocity;
             motorForce = speedMod * -(xrInput.controller.pos.RightVelocity.z) * Mathf.Cos(Mathf.Deg2Rad * rudderAngle);
-            rudderAngle = rudderMaxAngle * (xrInput.controller.pos.RightVelocity.z);
+            rudderAngle = rudderMaxAngle * -(xrInput.controller.pos.RightVelocity.z);
         }
        
         if (floater.floatType == Floater.FloaterType.Ideal)
