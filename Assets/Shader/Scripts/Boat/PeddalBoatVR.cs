@@ -41,6 +41,7 @@ public class PeddalBoatVR : MonoBehaviour
         floater = gameObject.GetComponent<Floater>() ? gameObject.GetComponent<Floater>() : gameObject.AddComponent<Floater>();
         RightPaddelPoint = RightPaddelAxis.GetChild(0).GetChild(0).transform;
         LeftPaddelPoint = LeftPaddelAxis.GetChild(0).GetChild(0).transform;
+        isAbleToRow = false;
     }
 
     // Update is called once per frame
