@@ -43,6 +43,9 @@ public class PeddalBoatVR : MonoBehaviour
         LeftPaddelPoint = LeftPaddelAxis.GetChild(0).GetChild(0).transform;
         isAbleToRow = false;
     }
+    private void Start() {
+        isAbleToRow = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -103,20 +106,9 @@ public class PeddalBoatVR : MonoBehaviour
         //Debug.DrawLine(pos, point); 
         return pos.y < point.y;
     }
-    private void OnDrawGizmos() {
-       // Gizmos.color = Color.blue;
-       // Gizmos.DrawLine(RightPaddelAxis.position, xrInput.controller.RightController.transform.position);
-    }
-    private void ClampTransform(Transform PedalAxis, Transform VRPoint, Vector3 minClamp, Vector3 maxClamp)
+    public void SetVRPoints()
     {
-        PedalAxis.LookAt(VRPoint);
-        Debug.Log(PedalAxis.gameObject.name+" "+PedalAxis.rotation.eulerAngles);
-        Quaternion newQuat = PedalAxis.rotation;
-        newQuat.eulerAngles = new Vector3(
-            Mathf.Clamp(PedalAxis.rotation.x, minClamp.x, maxClamp.x), 
-            Mathf.Clamp(PedalAxis.rotation.y, minClamp.y, maxClamp.y), 
-            Mathf.Clamp(PedalAxis.rotation.z, minClamp.z, maxClamp.z));
-        PedalAxis.rotation = newQuat;
-
+        LeftVRControlPoint.transform.position= new Vector3(LeftVRControlPoint.transform.position.x, LeftVRControlPoint.transform.position.y, LeftPaddelAxis.transform.position.z);
+        RightVRControlPoint.transform.position= new Vector3(RightVRControlPoint.transform.position.x, RightVRControlPoint.transform.position.y, RightPaddelAxis.transform.position.z);
     }
 }
