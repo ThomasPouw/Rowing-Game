@@ -6,6 +6,7 @@ public class PedalBounds : MonoBehaviour
 {
     //public Transform UpLeftPoint;
     //public Transform DownRightPoint;
+
     private Transform parent;
     [SerializeField] private Vector3 BoxBound;
     private Vector3 downPoint;
@@ -53,7 +54,9 @@ public class PedalBounds : MonoBehaviour
        // Debug.Log("Z Condition: "+ (downPoint.z < pedalTransform.position.z) + ", "+ (upPoint.z > pedalTransform.position.z) + " "+ (downPoint.z < pedalTransform.position.z && upPoint.z > pedalTransform.position.z));
        // Debug.Log(pedalTransform.gameObject.name+" here!"+ pedalTransform.position+ "BoundBox: "+ downPoint+ " "+ upPoint);
         if(!(downPoint.x < pedalTransform.position.x && upPoint.x > pedalTransform.position.x))
+        {
             return false;
+        }
         if(!(downPoint.y < pedalTransform.position.y && upPoint.y > pedalTransform.position.y))
             return false;
         if(!(downPoint.z < pedalTransform.position.z && upPoint.z > pedalTransform.position.z))

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using JustPtrck.Shaders.Water;
 using UnityEngine;
 
@@ -29,6 +30,8 @@ public class PeddalBoatVR : MonoBehaviour
     [SerializeField] private GameObject LeftVRControlPoint;
     [SerializeField] private GameObject RightVRControlPoint;
     private bool isAbleToRow = false;
+    private Stack<bool> leftPedalStack = new Stack<bool>();
+    private Stack<bool> rightPedalStack = new Stack<bool>();
     [Header("Sound Manager")]
     [SerializeField] private RowingSoundManager rowingSoundManager;
     
@@ -54,9 +57,15 @@ public class PeddalBoatVR : MonoBehaviour
         //ClampTransform(LeftPaddelAxis.transform, LeftPaddelPoint.transform, new Vector3(0,0,0), new Vector3(40,40,40));
         //ClampTransform(RightPaddelAxis.transform, RightVRControlPoint.transform, new Vector3(320,120,0), new Vector3(360,240,0));
         //Debug.Log(LeftPaddelPoint.transform);
-        if(pedalBounds.isPedalInBox(LeftVRControlPoint.transform))
+        leftPedalStack.Push(pedalBounds.isPedalInBox(LeftVRControlPoint.transform));
+        rightPedalStack.Push(pedalBounds.isPedalInBox(RightVRControlPoint.transform));
+        if(leftPedalStack.Count > 10)
+            leftPedalStack.Pop();
+        if(rightPedalStack.Count > 10)
+            rightPedalStack.Pop();
+        if(leftPedalStack.All(x => x == false))
             LeftPaddelAxis.transform.LookAt(LeftVRControlPoint.transform);
-        if(pedalBounds.isPedalInBox(RightVRControlPoint.transform))
+        if(rightPedalStack.All(x => x == false))
             RightPaddelAxis.transform.LookAt(RightVRControlPoint.transform);
         if(isAbleToRow)
             return;
