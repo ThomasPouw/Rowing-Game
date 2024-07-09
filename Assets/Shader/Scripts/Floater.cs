@@ -1,7 +1,10 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
+using UnityEngine.Rendering;
+using static JustPtrck.Shaders.Water.WaveManager;
 
 namespace JustPtrck.Shaders.Water{
     public class Floater : MonoBehaviour
@@ -44,25 +47,32 @@ namespace JustPtrck.Shaders.Water{
 
         private Vector3 meanVector;
         private Vector3 meanNormal;
+        private Vector3 sumVector;
+        private Vector3 sumNormal;
         private List<Vector3> points;
+        private bool CoroutineOpen = true;
 
         private void Start() {
             if (floaters.Count <= 0) floaters.Add(transform);        
             rb = gameObject.GetComponent<Rigidbody>() ? gameObject.GetComponent<Rigidbody>() : gameObject.AddComponent<Rigidbody>();
             rb.useGravity = false;
+            points = new List<Vector3>();
         }
 
         private void FixedUpdate() {
-            switch(floaterType){
-                case FloaterType.Physics:
-                rb.useGravity = true;
-                SimulatePhysics();
+            if(CoroutineOpen){
+                switch(floaterType){
+                    case FloaterType.Physics:
+                    rb.useGravity = true;
+                    SimulatePhysics();
                 break;
 
                 case FloaterType.Ideal:
-                rb.useGravity = false;
-                StartCoroutine(CalcPosition());
+                    rb.useGravity = false;
+                    CoroutineOpen = false;
+                    StartCoroutine(CalcPosition());
                 break;
+            }
             }
         }
 
@@ -74,43 +84,43 @@ namespace JustPtrck.Shaders.Water{
         /// </summary>
         public IEnumerator CalcPosition()
         {
-            Vector3 sumVector = Vector3.zero;
-            Vector3 sumNormals = Vector3.zero;
-            points = new List<Vector3>(); 
+            //Vector3 sumVector = Vector3.zero;
+            //Vector3 sumNormals = Vector3.zero;
 
             foreach (Transform floater in floaters)
             {
-                Vector3 normal = new Vector3();
                 Vector3 floaterPos = anchor.position + Vector3.Scale(transform.localScale, floater.localPosition);
-                Vector3 point = WaveManager.instance.GetDisplacementFromGPU(floaterPos, ref normal);
-                points.Add(point);
-                sumVector += point;
-                sumNormals += normal;
-                if (showNormals) Debug.DrawRay(point, normal, Color.yellow);
+                WaveManager.instance.GetDisplacementFromGPU(floaterPos, CallbackCalculatePosition);
             }
+            //Debug.Log(points.Count);
+            yield return new WaitUntil(() => points.Count > 3 || points.Count == 4 || points.Count == 0);
+            points = new List<Vector3>(); 
             meanVector = sumVector / floaters.Count;
-            meanNormal = sumNormals / floaters.Count;
+            meanNormal = sumNormal / floaters.Count;
             transform.position = meanVector;
             transform.up = meanNormal;
             //Vector3 temp = transform.position + new Vector3(Mathf.Sin(anchor.rotationAngle), 0f, Mathf.Cos(anchor.rotationAngle)).normalized;
             transform.Rotate(transform.up, anchor.rotationAngle, Space.World);
             if (showNormals) Debug.DrawRay(transform.position, meanNormal, Color.red);
+            CoroutineOpen = true;
             yield return 0;
+
+
         }
-        private void CalculatePosition(){
-            Vector3 sumVector = Vector3.zero;
-            Vector3 sumNormals = Vector3.zero;
+        /*private void CalculatePosition(){
+            //Vector3 sumVector = Vector3.zero;
+            //Vector3 sumNormals = Vector3.zero;
             points = new List<Vector3>(); 
 
             foreach (Transform floater in floaters)
             {
-                Vector3 normal = new Vector3();
+                //Vector3 normal = new Vector3();
                 Vector3 floaterPos = anchor.position + Vector3.Scale(transform.localScale, floater.localPosition);
-                Vector3 point = WaveManager.instance.GetDisplacementFromGPU(floaterPos, ref normal);
-                points.Add(point);
-                sumVector += point;
-                sumNormals += normal;
-                if (showNormals) Debug.DrawRay(point, normal, Color.yellow);
+                Vector3[] point = WaveManager.instance.GetDisplacementFromGPU(floaterPos);
+                points.Add(point[0]);
+                sumVector += point[0];
+                sumNormals += point[1];
+                if (showNormals) Debug.DrawRay(point[0], point[1], Color.yellow);
             }
             meanVector = sumVector / floaters.Count;
             meanNormal = sumNormals / floaters.Count;
@@ -119,6 +129,26 @@ namespace JustPtrck.Shaders.Water{
             //Vector3 temp = transform.position + new Vector3(Mathf.Sin(anchor.rotationAngle), 0f, Mathf.Cos(anchor.rotationAngle)).normalized;
             transform.Rotate(transform.up, anchor.rotationAngle, Space.World);
             if (showNormals) Debug.DrawRay(transform.position, meanNormal, Color.red);
+        }*/
+        private void CallbackCalculatePosition(AsyncGPUReadbackRequest asyncGPUReadbackRequest)
+        {
+            if(asyncGPUReadbackRequest.hasError)
+            {
+                Debug.LogError("Shader has run for too long.");
+                throw new System.Exception("To long");
+
+            }
+            DN[] dn = asyncGPUReadbackRequest.GetData<DN>(0).ToArray();
+            points.Add(dn[0].displacement);
+            sumVector += dn[0].displacement;
+            sumNormal += dn[0].normal;
+            if (showNormals) Debug.DrawRay(dn[0].displacement, dn[0].normal, Color.yellow);
+
+        }
+        private void CallBackSimulatePhysics(AsyncGPUReadbackRequest asyncGPUReadbackRequest)
+        {
+            DN[] dn = asyncGPUReadbackRequest.GetData<DN>(0).ToArray();
+            
         }
 
         /// <summary>
@@ -130,8 +160,8 @@ namespace JustPtrck.Shaders.Water{
         private void SimulatePhysics(){
             foreach (Transform floater in floaters)
             {
-                Vector3 floaterPos = floater.position;
-                Vector3 displacement = WaveManager.instance.GetDisplacementFromGPU(floaterPos) - new Vector3(floater.position.x, 0, floater.position.z);
+                /*Vector3 floaterPos = floater.position;
+                Vector3 displacement = WaveManager.instance.GetDisplacementFromGPU(floaterPos)[0] - new Vector3(floater.position.x, 0, floater.position.z);
 
                 float temp = Mathf.Clamp(displacement.y - floater.position.y, 0f, 5f) * boyancyMod;
                 // ERROR FIX THIS SHIT AAAAHHHH
@@ -149,8 +179,7 @@ namespace JustPtrck.Shaders.Water{
                     Debug.DrawLine(floater.position + buoyancyVector, floater.position, Color.red);
                     // rb.AddForceAtPosition(new Vector3(-displacement.x, Mathf.Abs(Physics.gravity.y), -displacement.z) * displacementMultiplier, floaterPos, ForceMode.Acceleration);
                     rb.AddForce(displacementMultiplier * -rb.velocity * waterDrag * Time.fixedDeltaTime / floaters.Count, ForceMode.VelocityChange);
-                    rb.AddTorque(displacementMultiplier * -rb.angularVelocity * waterAngularDrag * Time.fixedDeltaTime / floaters.Count, ForceMode.VelocityChange);
-                }
+                    rb.AddTorque(displacementMultiplier * -rb.angularVelocity * waterAngularDrag * Time.fixedDeltaTime / floaters.Count, ForceMode.VelocityChange);*/
             }
         }
 

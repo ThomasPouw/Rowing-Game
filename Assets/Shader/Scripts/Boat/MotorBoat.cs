@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using JustPtrck.Shaders.Water;
+using UnityEngine.Rendering;
+using System.Net;
+using static JustPtrck.Shaders.Water.WaveManager;
 
 namespace JustPtrck.Water.Interactables{
     public class MotorBoat : MonoBehaviour
@@ -44,9 +47,14 @@ namespace JustPtrck.Water.Interactables{
             // TEMP Formula for force
             if (floater.floatType == Floater.FloaterType.Ideal)
                 IdealMove(motorForce);
-            else if (motor.position.y < WaveManager.instance.GetDisplacementFromGPU(motor.position).y)
+            else  
+                WaveManager.instance.GetDisplacementFromGPU(motor.position, CallBackMotor);
+        }
+        private void CallBackMotor(AsyncGPUReadbackRequest asyncGPUReadbackRequest)
+        {
+            DN[] dn = asyncGPUReadbackRequest.GetData<DN>(0).ToArray();
+            if(motor.position.y < dn[0].displacement.y)
                 rb.AddForceAtPosition(rudder.forward * motorForce, motor.position, ForceMode.Acceleration);
-
         }
         public void OnAccelerate(InputValue value)
         {

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using JustPtrck.Shaders.Water;
+using UnityEngine.Rendering;
+using static JustPtrck.Shaders.Water.WaveManager;
 
 public class FishAI : MonoBehaviour
 {
@@ -23,8 +25,7 @@ public class FishAI : MonoBehaviour
     {
         if (target != null)
         {
-            if (transform.position.y > WaveManager.instance.GetDisplacementFromGPU(transform.position).y)
-                fishRigidbody.AddForce(Vector3.up * Physics.gravity.y, ForceMode.Acceleration);
+            WaveManager.instance.GetDisplacementFromGPU(transform.position, CallbackFish);
 
             if (Vector3.Distance(target.position, transform.position) > 5)
                 SwimTowardsTarget();
@@ -32,7 +33,12 @@ public class FishAI : MonoBehaviour
             else CircleTarget();
         }
     }
-
+    private void CallbackFish(AsyncGPUReadbackRequest asyncGPUReadbackRequest)
+    {
+        DN[] dn = asyncGPUReadbackRequest.GetData<DN>(0).ToArray();
+        if(transform.position.y > dn[0].displacement.y)
+            fishRigidbody.AddForce(Vector3.up * Physics.gravity.y, ForceMode.Acceleration);
+    }
     void SwimTowardsTarget()
     {
         // Calculate the direction to the target

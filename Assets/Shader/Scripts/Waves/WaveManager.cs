@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
+using System.Threading.Tasks;
 
 namespace JustPtrck.Shaders.Water{
         
@@ -41,18 +43,18 @@ namespace JustPtrck.Shaders.Water{
             UpdateGPUValues(waveMaterial);
         }
 
-        public Vector3 GetDisplacementFromGPU(Vector3 position)
+        /*public Vector3 GetDisplacementFromGPU(Vector3 position)
         {
             Vector3 normal = Vector3.zero;
             return GetDisplacementFromGPU(position, ref normal);
-        }
+        }*/
         private DN[] data;
         /// <summary>
         /// IDEA Look into how Buffers work!
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public Vector3 GetDisplacementFromGPU(Vector3 position, ref Vector3 normal)
+        public void GetDisplacementFromGPU(Vector3 position, Action<AsyncGPUReadbackRequest> callback)
         {
             UpdateGPUValues(computeShader);
             DN dn = new DN();
@@ -63,17 +65,37 @@ namespace JustPtrck.Shaders.Water{
             ComputeBuffer dnBuffer = new ComputeBuffer(data.Length, dnSize);
 
             dnBuffer.SetData(data);
+            //AsyncGPUReadback.Request
             computeShader.SetFloat("time_in", Shader.GetGlobalVector("_Time").y);
-            computeShader.SetBuffer(0, "dnBuffer", dnBuffer);
-            computeShader.Dispatch(0, 1, 1, 1);
+            AsyncGPUReadbackRequest aGPUrequest = AsyncGPUReadback.Request(dnBuffer, callback);
+            //new WaitUntil(() => aGPUrequest.done && !aGPUrequest.hasError);
+            //aGPUrequest.WaitForCompletion();
+            //data = aGPUrequest.GetData<DN>(0).ToArray();
 
-            dnBuffer.GetData(data);
+            //Debug.Log($"{aGPUrequest.done}\n{data [0].vertex_in}\n{data [0].displacement}\n{data [0].normal}");
+            //computeShader.SetBuffer(0, "dnBuffer", dnBuffer);
+            //computeShader.Dispatch(0, 1, 1, 1);
+
+            //dnBuffer.GetData(data);
             //Debug.Log($"{data[0].vertex_in}\n{data[0].displacement}\n{data[0].normal}");
-            normal = data[0].normal;
-            Vector3 displacement = data[0].displacement;
+            //normal = data[0].normal;
+            //Vector3 displacement = data[0].displacement;
 
-            dnBuffer.Dispose();
-            return displacement;
+            //dnBuffer.Dispose();
+        
+            //return new Vector3[]{data[0].displacement, data[0].normal};
+        }
+        private void OnCompleteGPU(AsyncGPUReadbackRequest asyncGPUReadbackRequest)
+        {
+            if(asyncGPUReadbackRequest.hasError){
+                //Debug.LogError(asyncGPUReadbackRequest.er)
+            }
+           // DN[] d = asyncGPUReadbackRequest.GetData<DN>(0).ToArray();
+           // Debug.Log(asyncGPUReadbackRequest.layerCount);
+            DN[] D = asyncGPUReadbackRequest.GetData<DN>(0).ToArray();
+            
+            //Debug.Log(asyncGPUReadbackRequest.GetData<DN>(0).ToArray()[0].displacement);
+            //Debug.Log($"{D[0].vertex_in}\n{D[0].displacement}\n{D[0].normal}");
         }
 
         private void UpdateGPUValues(ComputeShader GPULocation){

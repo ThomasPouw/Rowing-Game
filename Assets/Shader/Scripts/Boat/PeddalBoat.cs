@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using JustPtrck.Shaders.Water;
 using UnityEngine.XR.Interaction.Toolkit;
+using static JustPtrck.Shaders.Water.WaveManager;
+using UnityEngine.Rendering;
 public class PeddalBoat : MonoBehaviour
 {
     [Header("Boat Parameters")]
@@ -64,7 +66,7 @@ public class PeddalBoat : MonoBehaviour
             if(SteeringAngle > 0)
             {
                 eclipsePeddal(ref LeftPaddelAngle, LeftPaddelAxis, SteeringAngle, true);
-                rudderAngle = isAbleToPaddel(LeftPaddelPoint.position) ? rudderAngle = rudderMaxAngle * SteeringAngle : 0;
+                rudderAngle = isAbleToPaddel(LeftPaddelPoint.position) ? rudderMaxAngle * SteeringAngle : 0;
             }
             else
             {
@@ -87,7 +89,12 @@ public class PeddalBoat : MonoBehaviour
         // TEMP Formula for force
         if (floater.floatType == Floater.FloaterType.Ideal)
              IdealMove(motorForce);
-        else if (motor.position.y < WaveManager.instance.GetDisplacementFromGPU(motor.position).y)
+        WaveManager.instance.GetDisplacementFromGPU(motor.position, CallBackMotor);
+    }
+    private void CallBackMotor(AsyncGPUReadbackRequest asyncGPUReadbackRequest)
+    {
+        DN[] dn = asyncGPUReadbackRequest.GetData<DN>(0).ToArray();
+        if(motor.position.y < dn[0].displacement.y)
             rb.AddForceAtPosition(rudder.forward * motorForce, motor.position, ForceMode.Acceleration);
     }
     public void OnAccelerate(InputValue value)
@@ -151,9 +158,19 @@ public class PeddalBoat : MonoBehaviour
     }
     private bool isAbleToPaddel(Vector3 pos)
     {
-        Vector3 normal = new Vector3();
-        Vector3 point = WaveManager.instance.GetDisplacementFromGPU(pos, ref normal);
+        
+        return false;
+        //Vector3 normal = new Vector3();
+        /*Vector3 point = WaveManager.instance.GetDisplacementFromGPU(pos)[0];
         Debug.DrawLine(pos, point);
-        return pos.y < point.y;
+        return pos.y < point.y;*/
+    }
+    private void CallbackPedal(AsyncGPUReadbackRequest asyncGPUReadbackRequest)
+    {
+        DN[] dn = asyncGPUReadbackRequest.GetData<DN>(0).ToArray();
+
+
+        rudderAngle = isAbleToPaddel(RightPaddelPoint.position) ? rudderMaxAngle * SteeringAngle : 0;
+
     }
 }

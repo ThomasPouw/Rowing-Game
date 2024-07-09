@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using JustPtrck.Shaders.Water;
+using UnityEngine.Rendering;
+using static JustPtrck.Shaders.Water.WaveManager;
 
 public class Hover : MonoBehaviour
 {
@@ -10,7 +12,12 @@ public class Hover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       float disp = WaveManager.instance.GetDisplacementFromGPU(transform.position).y + height;
-       transform.position += Vector3.up * (disp - transform.position.y);
+       WaveManager.instance.GetDisplacementFromGPU(transform.position, CallBackHover);
+    }
+    private void CallBackHover(AsyncGPUReadbackRequest asyncGPUReadbackRequest)
+    {
+        DN[] dn = asyncGPUReadbackRequest.GetData<DN>(0).ToArray();
+        float disp = dn[0].displacement.y+ height;
+        transform.position += Vector3.up * (disp - transform.position.y);
     }
 }
